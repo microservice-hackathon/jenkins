@@ -37,7 +37,7 @@ job('deploy-app') {
     }
     publishers {
         downstreamParameterized {
-            trigger('run-smoke-test', 'SUCCESS', true) {
+            trigger('run-smoke-tests', 'SUCCESS', true) {
                 currentBuild()
             }
         }
