@@ -110,7 +110,7 @@ job('deploy-to-prod') {
     }
 }
 
-buildPipelineView('boot-microservice-build-pipeline') {
+buildPipelineView('boot-microservice') {
     showAggregatedPipeline()
     columns(2)
     sorting(Sorting.TITLE)
@@ -123,8 +123,7 @@ buildPipelineView('boot-microservice-build-pipeline') {
     }
 }
 
-deliveryPipelineView('boot-microservice-delivery-pipeline') {
-    pipelineInstances(10)
+deliveryPipelineView('boot-microservice') {
     showAggregatedPipeline()
     columns(2)
     sorting(Sorting.TITLE)
