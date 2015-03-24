@@ -4,7 +4,9 @@ def branches = new groovy.json.JsonSlurper().parse(branchApi.newReader())
 
 job('build') {
     deliveryPipelineConfiguration('Build')
-	deliveryPipelineVersion("""1.0.0.\${GROOVY,script = "return new Date().format('yyyyMMddHHmmss')"}""", true)
+    wrappers {
+        deliveryPipelineVersion("""1.0.0.\${GROOVY,script = "return new Date().format('yyyyMMddHHmmss')"}""", true)
+    }
     scm {
         git("git://github.com/${project}.git", 'master')
     }
@@ -24,7 +26,9 @@ job('build') {
 
 job('publish') {
     deliveryPipelineConfiguration('Build')
-	deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    wrappers {
+        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    }
     scm {
         git("git://github.com/${project}.git", 'master')
     }
@@ -44,7 +48,9 @@ job('publish') {
 
 job('deploy-stub-runner') {
     deliveryPipelineConfiguration('Smoke tests')
-	deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    wrappers {
+        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    }
     scm {
         git("git://github.com/${project}.git", 'master')
     }
@@ -64,7 +70,9 @@ job('deploy-stub-runner') {
 
 job('deploy-app') {
     deliveryPipelineConfiguration('Smoke tests')
-	deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    wrappers {
+        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    }
     scm {
         git("git://github.com/${project}.git", 'master')
     }
@@ -84,7 +92,9 @@ job('deploy-app') {
 
 job('run-smoke-tests') {
     deliveryPipelineConfiguration('Smoke tests')
-	deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    wrappers {
+        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    }
     scm {
         git("git://github.com/${project}.git", 'master')
     }
@@ -104,7 +114,9 @@ job('run-smoke-tests') {
 
 job('deploy-previous-version') {
     deliveryPipelineConfiguration('Smoke tests')
-	deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    wrappers {
+        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    }
     scm {
         git("git://github.com/${project}.git", 'master')
     }
@@ -124,7 +136,9 @@ job('deploy-previous-version') {
 
 job('run-smoke-tests-on-old-jar') {
     deliveryPipelineConfiguration('Smoke tests')
-	deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    wrappers {
+        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    }
     scm {
         git("git://github.com/${project}.git", 'master')
     }
@@ -144,7 +158,9 @@ job('run-smoke-tests-on-old-jar') {
 
 job('deploy-to-prod') {
     deliveryPipelineConfiguration('Deploy to prod')
-	deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    wrappers {
+        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    }
     scm {
         git("git://github.com/${project}.git", 'master')
     }
