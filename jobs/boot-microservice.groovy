@@ -14,6 +14,7 @@ job('build') {
         downstreamParameterized {
             trigger('publish', 'SUCCESS', true) {
                 currentBuild()
+                sameNode()
             }
         }
     }
@@ -28,6 +29,7 @@ job('publish') {
         downstreamParameterized {
             trigger('deploy-stub-runner', 'SUCCESS', true) {
                 currentBuild()
+                sameNode()
             }
         }
     }
@@ -42,6 +44,7 @@ job('deploy-stub-runner') {
         downstreamParameterized {
             trigger('deploy-app', 'SUCCESS', true) {
                 currentBuild()
+                sameNode()
             }
         }
     }
@@ -56,6 +59,7 @@ job('deploy-app') {
         downstreamParameterized {
             trigger('run-smoke-tests', 'SUCCESS', true) {
                 currentBuild()
+                sameNode()
             }
         }
     }
@@ -70,6 +74,7 @@ job('run-smoke-tests') {
         downstreamParameterized {
             trigger('deploy-previous-version', 'SUCCESS', true) {
                 currentBuild()
+                sameNode()
             }
         }
     }
@@ -84,6 +89,7 @@ job('deploy-previous-version') {
         downstreamParameterized {
             trigger('run-smoke-tests-on-old-jar', 'SUCCESS', true) {
                 currentBuild()
+                sameNode()
             }
         }
     }
@@ -98,6 +104,7 @@ job('run-smoke-tests-on-old-jar') {
         downstreamParameterized {
             trigger('deploy-to-prod', 'SUCCESS', true) {
                 currentBuild()
+                sameNode()
             }
         }
     }
