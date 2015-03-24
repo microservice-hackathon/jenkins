@@ -1,10 +1,10 @@
 package utilities
 
-import javaposse.jobdsl.dsl.Job
+import javaposse.jobdsl.dsl.FreeStyleJob
 
 public class MyUtilities {
     
-    def donwstreamJob(Job job) {
+    def donwstreamJob(FreeStyleJob job) {
         job.with {
             wrappers {
                 deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
