@@ -15,6 +15,7 @@ job('build') {
             trigger('publish', 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
+                gitRevision()
             }
         }
     }
@@ -33,6 +34,7 @@ job('publish') {
             trigger('deploy-stub-runner', 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
+                gitRevision()
             }
         }
     }
@@ -51,6 +53,7 @@ job('deploy-stub-runner') {
             trigger('deploy-app', 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
+                gitRevision()
             }
         }
     }
@@ -69,6 +72,7 @@ job('deploy-app') {
             trigger('run-smoke-tests', 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
+                gitRevision()
             }
         }
     }
@@ -87,6 +91,7 @@ job('run-smoke-tests') {
             trigger('deploy-previous-version', 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
+                gitRevision()
             }
         }
     }
@@ -105,6 +110,7 @@ job('deploy-previous-version') {
             trigger('run-smoke-tests-on-old-jar', 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
+                gitRevision()
             }
         }
     }
@@ -123,6 +129,7 @@ job('run-smoke-tests-on-old-jar') {
             trigger('deploy-to-prod', 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
+                gitRevision()
             }
         }
     }
