@@ -1,11 +1,12 @@
 
 def project = '4finance/boot-microservice'
+def project_name = 'boot-microservice'
 def branchApi = new URL("https://api.github.com/repos/${project}/branches")
 def branches = new groovy.json.JsonSlurper().parse(branchApi.newReader())
 
-job('build') {
+job("${project_name}-build") {
     deliveryPipelineConfiguration('Build')
-	displayName('Build')
+	displayName("${project_name} - build")
     wrappers {
         deliveryPipelineVersion("""1.0.0.\${GROOVY,script = "return new Date().format('yyyyMMddHHmmss')"}""", true)
     }
@@ -26,9 +27,9 @@ job('build') {
     }
 }
 
-job('publish') {
+job("${project_name}-publish") {
     deliveryPipelineConfiguration('Build')
-	displayName('Publish artifacts')
+	displayName("${project_name} - publish artifacts")
     wrappers {
         deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
     }
@@ -49,8 +50,8 @@ job('publish') {
     }
 }
 
-job('deploy-stub-runner') {
-	displayName('Deploy stub-runner')
+job("${project_name}-deploy-stub-runner") {
+	displayName("${project_name} - deploy stub-runner")
     deliveryPipelineConfiguration('Smoke tests')
     wrappers {
         deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
@@ -72,8 +73,8 @@ job('deploy-stub-runner') {
     }
 }
 
-job('deploy-app') {
-	displayName('Deploy application')
+job("${project_name}-deploy-app") {
+	displayName("${project_name} - deploy application")
     deliveryPipelineConfiguration('Smoke tests')
     wrappers {
         deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
@@ -95,9 +96,9 @@ job('deploy-app') {
     }
 }
 
-job('run-smoke-tests') {
+job("${project_name}-run-smoke-tests") {
     deliveryPipelineConfiguration('Smoke tests')
-	displayName('Run smoke tests')
+	displayName("${project_name} - run smoke tests")
     wrappers {
         deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
     }
@@ -118,8 +119,9 @@ job('run-smoke-tests') {
     }
 }
 
-job('deploy-previous-version') {
+job("${project_name}-deploy-previous-version") {
     deliveryPipelineConfiguration('Smoke tests')
+	displayName("${project_name} - deploy prev version")
     wrappers {
         deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
     }
@@ -140,8 +142,9 @@ job('deploy-previous-version') {
     }
 }
 
-job('run-smoke-tests-on-old-jar') {
+job("${project_name}-run-smoke-tests-on-old-jar") {
     deliveryPipelineConfiguration('Smoke tests')
+	displayName("${project_name} - run smoke tests on prev version")
     wrappers {
         deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
     }
@@ -162,8 +165,9 @@ job('run-smoke-tests-on-old-jar') {
     }
 }
 
-job('deploy-to-prod') {
+job("${project_name}-deploy-to-prod") {
     deliveryPipelineConfiguration('Deploy to prod')
+	displayName("${project_name} - deploy to prod")
     wrappers {
         deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
     }
