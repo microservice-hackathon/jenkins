@@ -8,7 +8,7 @@ job('build') {
         git("git://github.com/${project}.git", 'master')
     }
     steps {
-        gradle('clean build -x test')
+        gradle('build -x test')
     }
     publishers {
         downstreamParameterized {
@@ -22,8 +22,11 @@ job('build') {
 
 job('publish') {
     deliveryPipelineConfiguration('Build')
+    scm {
+        git("git://github.com/${project}.git", 'master')
+    }
     steps {
-        gradle('clean build -x test')
+        gradle('build -x test')
     }
     publishers {
         downstreamParameterized {
@@ -37,8 +40,11 @@ job('publish') {
 
 job('deploy-stub-runner') {
     deliveryPipelineConfiguration('Smoke tests')
+    scm {
+        git("git://github.com/${project}.git", 'master')
+    }
     steps {
-        gradle('clean build -x test')
+        gradle('build -x test')
     }
     publishers {
         downstreamParameterized {
@@ -52,8 +58,11 @@ job('deploy-stub-runner') {
 
 job('deploy-app') {
     deliveryPipelineConfiguration('Smoke tests')
+    scm {
+        git("git://github.com/${project}.git", 'master')
+    }
     steps {
-        gradle('clean build -x test')
+        gradle('build -x test')
     }
     publishers {
         downstreamParameterized {
@@ -67,8 +76,11 @@ job('deploy-app') {
 
 job('run-smoke-tests') {
     deliveryPipelineConfiguration('Smoke tests')
+    scm {
+        git("git://github.com/${project}.git", 'master')
+    }
     steps {
-        gradle('clean build -x test')
+        gradle('build -x test')
     }
     publishers {
         downstreamParameterized {
@@ -82,8 +94,11 @@ job('run-smoke-tests') {
 
 job('deploy-previous-version') {
     deliveryPipelineConfiguration('Smoke tests')
+    scm {
+        git("git://github.com/${project}.git", 'master')
+    }
     steps {
-        gradle('clean build -x test')
+        gradle('build -x test')
     }
     publishers {
         downstreamParameterized {
@@ -97,8 +112,11 @@ job('deploy-previous-version') {
 
 job('run-smoke-tests-on-old-jar') {
     deliveryPipelineConfiguration('Smoke tests')
+    scm {
+        git("git://github.com/${project}.git", 'master')
+    }
     steps {
-        gradle('clean build -x test')
+        gradle('build -x test')
     }
     publishers {
         downstreamParameterized {
@@ -112,8 +130,11 @@ job('run-smoke-tests-on-old-jar') {
 
 job('deploy-to-prod') {
     deliveryPipelineConfiguration('Deploy to prod')
+    scm {
+        git("git://github.com/${project}.git", 'master')
+    }
     steps {
-        gradle('clean build -x test')
+        gradle('build -x test')
     }
 }
 
