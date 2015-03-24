@@ -120,6 +120,6 @@ deliveryPipelineView('boot-microservice') {
     showAvatars()
     showChangeLog()
     pipelines {
-        component('Deploy microservice to production', 'publish')
+        component('Deploy microservice to production', 'build')
     }
 }
