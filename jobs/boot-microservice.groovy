@@ -110,7 +110,7 @@ job('deploy-to-prod') {
     }
 }
 
-buildPipelineView('boot-microservice') {
+buildPipelineView('boot-microservice-build') {
     filterBuildQueue()
     filterExecutors()
     title('Boot-microservice Pipeline')
@@ -121,7 +121,7 @@ buildPipelineView('boot-microservice') {
     refreshFrequency(60)
 }
 
-deliveryPipelineView('boot-microservice') {
+deliveryPipelineView('boot-microservice-delivery') {
     pipelineInstances(10)
     showAggregatedPipeline()
     columns(2)
