@@ -45,19 +45,7 @@ view(type: DeliveryPipelineView) {
     name('boot-microservice')
     pipelineInstances(10)
     showAggregatedPipeline()
-    columns {
-        status()
-        weather()
-        name()
-        lastSuccess()
-        lastFailure()
-        lastDuration()
-        buildButton()
-        lastBuildConsole() // since 1.23, requires the Extra Columns Plugin
-        configureProject() // since 1.31, requires the Extra Columns Plugin
-        claim()            // since 1.29, requires the Claim Plugin
-        lastBuildNode()    // since 1.31, requires the Build Node Column Plugin
-    }
+    columns(2)
     sorting(Sorting.TITLE)
     updateInterval(60)
     enableManualTriggers()
