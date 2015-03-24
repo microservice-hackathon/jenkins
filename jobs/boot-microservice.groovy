@@ -187,15 +187,15 @@ buildPipelineView('boot-microservice-build') {
     selectedJob("${project_name}-build")
     alwaysAllowManualTrigger()
     showPipelineParameters()
-    refreshFrequency(60)
+    refreshFrequency(5)
 }
 
 deliveryPipelineView('boot-microservice-delivery') {
-    pipelineInstances(10)
+    pipelineInstances(1)
     showAggregatedPipeline()
-    columns(2)
+    columns(1)
     sorting(Sorting.TITLE)
-    updateInterval(60)
+    updateInterval(5)
     enableManualTriggers()
     showAvatars()
     showChangeLog()
