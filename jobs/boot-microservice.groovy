@@ -12,7 +12,7 @@ job('build') {
     }
     publishers {
         downstreamParameterized {
-            trigger('deploy-stub-runner', 'SUCCESS', true) {
+            trigger('publish', 'SUCCESS', true) {
                 currentBuild()
             }
         }
