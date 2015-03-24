@@ -99,13 +99,6 @@ deliveryPipelineView('boot-microservice') {
     showAvatars()
     showChangeLog()
     pipelines {
-        component('Build and publish the app', 'publish')
-        component('Deploy stub-runner to stg', 'deploy-stub-runner')
-        component('Deploy app to stg', 'deploy-app')
-        component('Run smoke tests', 'run-smoke-tests')
-        component('Deploy previous version of the app', 'deploy-previous-version')
-        component('Run smoke tests', 'run-smoke-tests')
-        component('Run smoke tests on old jar', 'run-smoke-tests-on-old-jar')
-        component('Deploy to prod', 'deploy-to-prod')
+        component('Deploy microservice to production', 'publish')
     }
 }
