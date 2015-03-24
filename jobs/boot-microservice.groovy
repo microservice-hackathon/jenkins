@@ -111,7 +111,6 @@ job('deploy-to-prod') {
 }
 
 buildPipelineView('boot-microservice-build-pipeline') {
-    pipelineInstances(10)
     showAggregatedPipeline()
     columns(2)
     sorting(Sorting.TITLE)
