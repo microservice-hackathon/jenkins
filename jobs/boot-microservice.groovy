@@ -1,3 +1,6 @@
+
+import utilities.MyUtilities
+
 def project = '4finance/boot-microservice'
 def branchApi = new URL("https://api.github.com/repos/${project}/branches")
 def branches = new groovy.json.JsonSlurper().parse(branchApi.newReader())
