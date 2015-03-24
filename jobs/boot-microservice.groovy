@@ -4,7 +4,7 @@ def branches = new groovy.json.JsonSlurper().parse(branchApi.newReader())
 
 job('build') {
     deliveryPipelineConfiguration('Build')
-	deliveryPipelineVersion('1.0.0.${GROOVY,script = "return new Date().format("yyyyMMddHHmmss")"}', true)
+	deliveryPipelineVersion("""1.0.0.\${GROOVY,script = "return new Date().format('yyyyMMddHHmmss')"}""", true)
     scm {
         git("git://github.com/${project}.git", 'master')
     }
