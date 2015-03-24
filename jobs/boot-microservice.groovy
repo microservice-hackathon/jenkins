@@ -24,11 +24,8 @@ job('build') {
     }
 }
 
-job('publish') {
+MyUtilities.downstreamJob(job('publish') {
     deliveryPipelineConfiguration('Build')
-    wrappers {
-        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
-    }
     scm {
         git("git://github.com/${project}.git", 'master')
     }
@@ -44,7 +41,7 @@ job('publish') {
             }
         }
     }
-}
+})
 
 job('deploy-stub-runner') {
     deliveryPipelineConfiguration('Smoke tests')
