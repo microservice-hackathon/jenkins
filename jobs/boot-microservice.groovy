@@ -2,7 +2,8 @@ def project = '4finance/boot-microservice'
 def branchApi = new URL("https://api.github.com/repos/${project}/branches")
 def branches = new groovy.json.JsonSlurper().parse(branchApi.newReader())
 
-job('publish') {
+job('build') {
+    deliveryPipelineConfiguration('Build')
     scm {
         git("git://github.com/${project}.git", 'master')
     }
@@ -18,7 +19,22 @@ job('publish') {
     }
 }
 
+job('publish') {
+    deliveryPipelineConfiguration('Build')
+    steps {
+        gradle('clean build -x test')
+    }
+    publishers {
+        downstreamParameterized {
+            trigger('deploy-stub-runner', 'SUCCESS', true) {
+                currentBuild()
+            }
+        }
+    }
+}
+
 job('deploy-stub-runner') {
+    deliveryPipelineConfiguration('Smoke tests')
     steps {
         gradle('clean build -x test')
     }
@@ -32,6 +48,7 @@ job('deploy-stub-runner') {
 }
 
 job('deploy-app') {
+    deliveryPipelineConfiguration('Smoke tests')
     steps {
         gradle('clean build -x test')
     }
@@ -45,6 +62,7 @@ job('deploy-app') {
 }
 
 job('run-smoke-tests') {
+    deliveryPipelineConfiguration('Smoke tests')
     steps {
         gradle('clean build -x test')
     }
@@ -58,6 +76,7 @@ job('run-smoke-tests') {
 }
 
 job('deploy-previous-version') {
+    deliveryPipelineConfiguration('Smoke tests')
     steps {
         gradle('clean build -x test')
     }
@@ -71,6 +90,7 @@ job('deploy-previous-version') {
 }
 
 job('run-smoke-tests-on-old-jar') {
+    deliveryPipelineConfiguration('Smoke tests')
     steps {
         gradle('clean build -x test')
     }
@@ -84,6 +104,7 @@ job('run-smoke-tests-on-old-jar') {
 }
 
 job('deploy-to-prod') {
+    deliveryPipelineConfiguration('Deploy to prod')
     steps {
         gradle('clean build -x test')
     }
