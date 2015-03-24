@@ -18,7 +18,7 @@ job("${project_name}-build") {
     }
     publishers {
         downstreamParameterized {
-            trigger('publish', 'SUCCESS', true) {
+            trigger("${project_name}-publish", 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
                 gitRevision()
@@ -41,7 +41,7 @@ job("${project_name}-publish") {
     }
     publishers {
         downstreamParameterized {
-            trigger('deploy-stub-runner', 'SUCCESS', true) {
+            trigger("${project_name}-deploy-stub-runner", 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
                 gitRevision()
@@ -64,7 +64,7 @@ job("${project_name}-deploy-stub-runner") {
     }
     publishers {
         downstreamParameterized {
-            trigger('deploy-app', 'SUCCESS', true) {
+            trigger("${project_name}-deploy-app", 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
                 gitRevision()
@@ -87,7 +87,7 @@ job("${project_name}-deploy-app") {
     }
     publishers {
         downstreamParameterized {
-            trigger('run-smoke-tests', 'SUCCESS', true) {
+            trigger("${project_name}-run-smoke-tests", 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
                 gitRevision()
@@ -110,7 +110,7 @@ job("${project_name}-run-smoke-tests") {
     }
     publishers {
         downstreamParameterized {
-            trigger('deploy-previous-version', 'SUCCESS', true) {
+            trigger("${project_name}-deploy-previous-version", 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
                 gitRevision()
@@ -133,7 +133,7 @@ job("${project_name}-deploy-previous-version") {
     }
     publishers {
         downstreamParameterized {
-            trigger('run-smoke-tests-on-old-jar', 'SUCCESS', true) {
+            trigger("${project_name}-run-smoke-tests-on-old-jar", 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
                 gitRevision()
@@ -156,7 +156,7 @@ job("${project_name}-run-smoke-tests-on-old-jar") {
     }
     publishers {
         downstreamParameterized {
-            trigger('deploy-to-prod', 'SUCCESS', true) {
+            trigger("${project_name}-deploy-to-prod", 'SUCCESS', true) {
                 currentBuild()
                 sameNode()
                 gitRevision()
@@ -184,7 +184,7 @@ buildPipelineView('boot-microservice-build') {
     filterExecutors()
     title('Boot-microservice Pipeline')
     displayedBuilds(5)
-    selectedJob('build')
+    selectedJob("${project_name}-build")
     alwaysAllowManualTrigger()
     showPipelineParameters()
     refreshFrequency(60)
@@ -200,6 +200,6 @@ deliveryPipelineView('boot-microservice-delivery') {
     showAvatars()
     showChangeLog()
     pipelines {
-        component('Deploy microservice to production', 'build')
+        component('Deploy microservice to production', "${project_name}-build")
     }
 }
