@@ -1,12 +1,11 @@
 
-import utilities.MyUtilities
-
 def project = '4finance/boot-microservice'
 def branchApi = new URL("https://api.github.com/repos/${project}/branches")
 def branches = new groovy.json.JsonSlurper().parse(branchApi.newReader())
 
 job('build') {
     deliveryPipelineConfiguration('Build')
+	displayName('Build')
     wrappers {
         deliveryPipelineVersion("""1.0.0.\${GROOVY,script = "return new Date().format('yyyyMMddHHmmss')"}""", true)
     }
@@ -27,8 +26,12 @@ job('build') {
     }
 }
 
-MyUtilities.downstreamJob(job('publish') {
+job('publish') {
     deliveryPipelineConfiguration('Build')
+	displayName('Publish artifacts')
+    wrappers {
+        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    }
     scm {
         git("git://github.com/${project}.git", 'master')
     }
@@ -44,9 +47,10 @@ MyUtilities.downstreamJob(job('publish') {
             }
         }
     }
-})
+}
 
 job('deploy-stub-runner') {
+	displayName('Deploy stub-runner')
     deliveryPipelineConfiguration('Smoke tests')
     wrappers {
         deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
@@ -69,6 +73,7 @@ job('deploy-stub-runner') {
 }
 
 job('deploy-app') {
+	displayName('Deploy application')
     deliveryPipelineConfiguration('Smoke tests')
     wrappers {
         deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
@@ -92,6 +97,7 @@ job('deploy-app') {
 
 job('run-smoke-tests') {
     deliveryPipelineConfiguration('Smoke tests')
+	displayName('Run smoke tests')
     wrappers {
         deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
     }
