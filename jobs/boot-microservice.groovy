@@ -203,3 +203,20 @@ repos.each {
         }
     }
 }
+
+view('example-1', type: NestedView) {
+    views {
+        view('overview') {
+            jobs {
+                regex('fraud-detection-service-waw-.*')
+            }
+            columns {
+                status()
+                name()
+            }
+        }
+        view('pipeline', type: BuildPipelineView) {
+            selectedJob("fraud-detection-service-waw--build")
+        }
+    }
+}
