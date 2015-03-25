@@ -1,205 +1,205 @@
 
-def project = '4finance/boot-microservice'
-def project_name = 'boot-microservice'
-def branchApi = new URL("https://api.github.com/repos/${project}/branches")
-def branches = new groovy.json.JsonSlurper().parse(branchApi.newReader())
+def organization = 'microhackathon-2015-03-juglodz'
+def reposApi = new URL("https://api.github.com/orgs/${organization}/repos")
+def repos = new groovy.json.JsonSlurper().parse(reposApi.newReader())
 
-job("${project_name}-build") {
-    deliveryPipelineConfiguration('Build')
-	displayName("build")
-    wrappers {
-        deliveryPipelineVersion("""1.0.0.\${GROOVY,script = "return new Date().format('yyyyMMddHHmmss')"}""", true)
+repos.each {
+    def projectName = it.name
+    def projectGitRepo = it.url
+
+    if (projectName == "${organization}.github.io") {
+        return
     }
-    scm {
-        git("git://github.com/${project}.git", 'master')
-    }
-    steps {
-        gradle('build -x test')
-    }
-    publishers {
-        downstreamParameterized {
-            trigger("${project_name}-publish", 'SUCCESS', true) {
-                currentBuild()
-                sameNode()
-                gitRevision()
+    
+    job("${projectName}-build") {
+        deliveryPipelineConfiguration('Build')
+        wrappers {
+            deliveryPipelineVersion("""1.0.0.\${GROOVY,script = "return new Date().format('yyyyMMddHHmmss')"}""", true)
+        }
+        scm {
+            git(projectGitRepo, 'master')
+        }
+        steps {
+            gradle('build -x test')
+        }
+        publishers {
+            downstreamParameterized {
+                trigger("${projectName}-publish", 'SUCCESS', true) {
+                    currentBuild()
+                    sameNode()
+                    gitRevision()
+                }
             }
         }
     }
-}
-
-job("${project_name}-publish") {
-    deliveryPipelineConfiguration('Build')
-	displayName("publish artifacts")
-    wrappers {
-        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
-    }
-    scm {
-        git("git://github.com/${project}.git", 'master')
-    }
-    steps {
-        gradle('build -x test')
-    }
-    publishers {
-        downstreamParameterized {
-            trigger("${project_name}-deploy-stub-runner", 'SUCCESS', true) {
-                currentBuild()
-                sameNode()
-                gitRevision()
+    
+    job("${projectName}-publish") {
+        deliveryPipelineConfiguration('Build')
+        wrappers {
+            deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+        }
+        scm {
+            git(projectGitRepo, 'master')
+        }
+        steps {
+            gradle('build -x test')
+        }
+        publishers {
+            downstreamParameterized {
+                trigger("${projectName}-deploy-stub-runner", 'SUCCESS', true) {
+                    currentBuild()
+                    sameNode()
+                    gitRevision()
+                }
             }
         }
     }
-}
-
-job("${project_name}-deploy-stub-runner") {
-	displayName("deploy stub-runner")
-    deliveryPipelineConfiguration('Smoke tests')
-    wrappers {
-        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
-    }
-    scm {
-        git("git://github.com/${project}.git", 'master')
-    }
-    steps {
-        gradle('build -x test')
-    }
-    publishers {
-        downstreamParameterized {
-            trigger("${project_name}-deploy-app", 'SUCCESS', true) {
-                currentBuild()
-                sameNode()
-                gitRevision()
+    
+    job("${projectName}-deploy-stub-runner") {
+        deliveryPipelineConfiguration('Smoke tests')
+        wrappers {
+            deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+        }
+        scm {
+            git(projectGitRepo, 'master')
+        }
+        steps {
+            gradle('build -x test')
+        }
+        publishers {
+            downstreamParameterized {
+                trigger("${projectName}-deploy-app", 'SUCCESS', true) {
+                    currentBuild()
+                    sameNode()
+                    gitRevision()
+                }
             }
         }
     }
-}
-
-job("${project_name}-deploy-app") {
-	displayName("deploy application")
-    deliveryPipelineConfiguration('Smoke tests')
-    wrappers {
-        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
-    }
-    scm {
-        git("git://github.com/${project}.git", 'master')
-    }
-    steps {
-        gradle('build -x test')
-    }
-    publishers {
-        downstreamParameterized {
-            trigger("${project_name}-run-smoke-tests", 'SUCCESS', true) {
-                currentBuild()
-                sameNode()
-                gitRevision()
+    
+    job("${projectName}-deploy-app") {
+        deliveryPipelineConfiguration('Smoke tests')
+        wrappers {
+            deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+        }
+        scm {
+            git(projectGitRepo, 'master')
+        }
+        steps {
+            gradle('build -x test')
+        }
+        publishers {
+            downstreamParameterized {
+                trigger("${projectName}-run-smoke-tests", 'SUCCESS', true) {
+                    currentBuild()
+                    sameNode()
+                    gitRevision()
+                }
             }
         }
     }
-}
-
-job("${project_name}-run-smoke-tests") {
-    deliveryPipelineConfiguration('Smoke tests')
-	displayName("run smoke tests")
-    wrappers {
-        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
-    }
-    scm {
-        git("git://github.com/${project}.git", 'master')
-    }
-    steps {
-        gradle('build -x test')
-    }
-    publishers {
-        downstreamParameterized {
-            trigger("${project_name}-deploy-previous-version", 'SUCCESS', true) {
-                currentBuild()
-                sameNode()
-                gitRevision()
+    
+    job("${projectName}-run-smoke-tests") {
+        deliveryPipelineConfiguration('Smoke tests')
+        wrappers {
+            deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+        }
+        scm {
+            git(projectGitRepo, 'master')
+        }
+        steps {
+            gradle('build -x test')
+        }
+        publishers {
+            downstreamParameterized {
+                trigger("${projectName}-deploy-previous-version", 'SUCCESS', true) {
+                    currentBuild()
+                    sameNode()
+                    gitRevision()
+                }
             }
         }
     }
-}
-
-job("${project_name}-deploy-previous-version") {
-    deliveryPipelineConfiguration('Smoke tests')
-	displayName("deploy prev version")
-    wrappers {
-        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
-    }
-    scm {
-        git("git://github.com/${project}.git", 'master')
-    }
-    steps {
-        gradle('build -x test')
-    }
-    publishers {
-        downstreamParameterized {
-            trigger("${project_name}-run-smoke-tests-on-old-jar", 'SUCCESS', true) {
-                currentBuild()
-                sameNode()
-                gitRevision()
+    
+    job("${projectName}-deploy-previous-version") {
+        deliveryPipelineConfiguration('Smoke tests')
+        wrappers {
+            deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+        }
+        scm {
+            git(projectGitRepo, 'master')
+        }
+        steps {
+            gradle('build -x test')
+        }
+        publishers {
+            downstreamParameterized {
+                trigger("${projectName}-run-smoke-tests-on-old-jar", 'SUCCESS', true) {
+                    currentBuild()
+                    sameNode()
+                    gitRevision()
+                }
             }
         }
     }
-}
-
-job("${project_name}-run-smoke-tests-on-old-jar") {
-    deliveryPipelineConfiguration('Smoke tests')
-	displayName("run smoke tests on prev version")
-    wrappers {
-        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
-    }
-    scm {
-        git("git://github.com/${project}.git", 'master')
-    }
-    steps {
-        gradle('build -x test')
-    }
-    publishers {
-        downstreamParameterized {
-            trigger("${project_name}-deploy-to-prod", 'SUCCESS', true) {
-                currentBuild()
-                sameNode()
-                gitRevision()
+    
+    job("${projectName}-run-smoke-tests-on-old-jar") {
+        deliveryPipelineConfiguration('Smoke tests')
+        wrappers {
+            deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+        }
+        scm {
+            git(projectGitRepo, 'master')
+        }
+        steps {
+            gradle('build -x test')
+        }
+        publishers {
+            downstreamParameterized {
+                trigger("${projectName}-deploy-to-prod", 'SUCCESS', true) {
+                    currentBuild()
+                    sameNode()
+                    gitRevision()
+                }
             }
         }
     }
-}
-
-job("${project_name}-deploy-to-prod") {
-    deliveryPipelineConfiguration('Deploy to prod')
-	displayName("deploy to prod")
-    wrappers {
-        deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+    
+    job("${projectName}-deploy-to-prod") {
+        deliveryPipelineConfiguration('Deploy to prod')
+        wrappers {
+            deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+        }
+        scm {
+            git(projectGitRepo, 'master')
+        }
+        steps {
+            gradle('build -x test')
+        }
     }
-    scm {
-        git("git://github.com/${project}.git", 'master')
+    
+    buildPipelineView("${projectName}-pipeline") {
+        filterBuildQueue()
+        filterExecutors()
+        title('Boot-microservice Pipeline')
+        displayedBuilds(5)
+        selectedJob("${projectName}-build")
+        alwaysAllowManualTrigger()
+        showPipelineParameters()
+        refreshFrequency(5)
     }
-    steps {
-        gradle('build -x test')
-    }
-}
-
-buildPipelineView('boot-microservice-build') {
-    filterBuildQueue()
-    filterExecutors()
-    title('Boot-microservice Pipeline')
-    displayedBuilds(5)
-    selectedJob("${project_name}-build")
-    alwaysAllowManualTrigger()
-    showPipelineParameters()
-    refreshFrequency(5)
-}
-
-deliveryPipelineView('boot-microservice-delivery') {
-    pipelineInstances(1)
-    showAggregatedPipeline()
-    columns(1)
-    sorting(Sorting.TITLE)
-    updateInterval(5)
-    enableManualTriggers()
-    showAvatars()
-    showChangeLog()
-    pipelines {
-        component('Deploy microservice to production', "${project_name}-build")
+    
+    deliveryPipelineView("${projectName}-delivery") {
+        pipelineInstances(1)
+        showAggregatedPipeline()
+        columns(1)
+        sorting(Sorting.TITLE)
+        updateInterval(5)
+        enableManualTriggers()
+        showAvatars()
+        showChangeLog()
+        pipelines {
+            component('Deploy microservice to production', "${projectName}-build")
+        }
     }
 }
