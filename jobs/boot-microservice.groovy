@@ -198,9 +198,18 @@ realmMultimap.each { String realm, List<String> projects ->
                     name()
                 }
             }
-            def view = this
+            buildPipelineView("test-pipeline") {
+                filterBuildQueue()
+                filterExecutors()
+                title("test Pipeline")
+                displayedBuilds(5)
+                selectedJob("ui-waw-build")
+                alwaysAllowManualTrigger()
+                showPipelineParameters()
+                refreshFrequency(5)
+            }
             projects.each {
-                view.buildPipelineView("${it}-pipeline") {
+                buildPipelineView("${it}-pipeline") {
                     filterBuildQueue()
                     filterExecutors()
                     title("${it} Pipeline")
@@ -224,9 +233,8 @@ realmMultimap.each { String realm, List<String> projects ->
         showAvatars()
         showChangeLog()
         pipelines {
-            def pipeline = this
             projects.each {
-                pipeline.component("Deploy $it to production".toString(), "${it}-build".toString())
+                component("Deploy $it to production", "${it}-build")
             }
         }
     }
