@@ -204,7 +204,7 @@ repos.each {
     }
 }
 
-view(type: NestedView) {
+nestedView('example-1') {
     views {
         view('overview') {
             jobs {
