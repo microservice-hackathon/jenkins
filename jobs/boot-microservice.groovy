@@ -176,15 +176,12 @@ projectToCode.each {
     }
 }
 
-println projectToCode
-
 Map<String, List<String>> realmMultimap = projectToCode.inject([:]) { acc, entry ->
     String realm = entry.name.split('-').last()
-    String firstPart = entry.name - '-' - realm
     if(acc[realm] == null) {
-        acc[realm] = [firstPart]
+        acc[realm] = [entry.name]
     } else {
-        acc[realm] << firstPart
+        acc[realm] << entry.name
     }
     return acc
 }
