@@ -5,7 +5,10 @@ def repos = new groovy.json.JsonSlurper().parse(reposApi.newReader())
 
 List projectToCode = repos.findAll {
     String projectName = it.name
-    return !(projectName == "${organization}.github.io" || projectName == "properties")
+    if( !(projectName == "${organization}.github.io" || projectName == "properties")) {
+        return projectName
+    }
+    return null
 }
 projectToCode.each {
     String projectName = it.name
