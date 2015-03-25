@@ -226,7 +226,7 @@ realmMultimap.each { String realm, List<String> projects ->
         pipelines {
             def pipeline = this
             projects.each {
-                pipeline.component("Deploy $it to production", "${it}-build")
+                pipeline.component("Deploy $it to production".toString(), "${it}-build")
             }
         }
     }
