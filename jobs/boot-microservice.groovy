@@ -214,7 +214,7 @@ realmMultimap.each { String realm, List<String> projects ->
     }
 
     deliveryPipelineView("${realm}-delivery") {
-        pipelineInstances(1)
+        pipelineInstances(0)
         showAggregatedPipeline()
         columns(1)
         sorting(Sorting.TITLE)
