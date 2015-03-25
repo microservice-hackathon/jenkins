@@ -3,13 +3,7 @@ def organization = 'microhackathon-2015-03-juglodz'
 def reposApi = new URL("https://api.github.com/orgs/${organization}/repos")
 def repos = new groovy.json.JsonSlurper().parse(reposApi.newReader())
 
-List projectToCode = repos.findAll {
-    String projectName = it.name
-    if( !(projectName == "${organization}.github.io" || projectName == "properties")) {
-        return projectName
-    }
-    return null
-}
+List projectToCode = repos.findAll {!(it.name == "${organization}.github.io" || it.name == "properties")}.collect { it.name }
 projectToCode.each {
     String projectName = it.name
     def projectGitRepo = it.clone_url
