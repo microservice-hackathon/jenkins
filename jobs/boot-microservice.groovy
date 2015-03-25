@@ -198,18 +198,8 @@ realmMultimap.each { String realm, List<String> projects ->
                     name()
                 }
             }
-            view('pipeline', type: BuildPipelineView) {
-                filterBuildQueue()
-                filterExecutors()
-                title("test Pipeline")
-                displayedBuilds(5)
-                selectedJob("ui-waw-build")
-                alwaysAllowManualTrigger()
-                showPipelineParameters()
-                refreshFrequency(5)
-            }
             projects.each {
-                buildPipelineView("${it}-pipeline") {
+                view("${it}-pipeline", type: BuildPipelineView) {
                     filterBuildQueue()
                     filterExecutors()
                     title("${it} Pipeline")
