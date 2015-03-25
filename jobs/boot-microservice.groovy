@@ -7,7 +7,7 @@ repos.each {
     def projectName = it.name
     def projectGitRepo = it.url
 
-    if (projectName == "${organization}.github.io") {
+    if (projectName == "${organization}.github.io" || projectName = "properties") {
         return
     }
     
