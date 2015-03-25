@@ -7,7 +7,7 @@ repos.each {
     def projectName = it.name
     def projectGitRepo = it.clone_url
 
-    if (projectName == "${organization}.github.io" || projectName = "properties") {
+    if (projectName == "${organization}.github.io" || projectName == "properties") {
         return
     }
     
