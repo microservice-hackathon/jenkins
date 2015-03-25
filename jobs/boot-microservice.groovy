@@ -189,15 +189,6 @@ Map<String, List<String>> realmMultimap = projectToCode.inject([:]) { acc, entry
 realmMultimap.each { String realm, List<String> projects ->
     nestedView(realm) {
         views {
-            view('overview') {
-                jobs {
-                    regex("^.*-$realm-.*\$")
-                }
-                columns {
-                    status()
-                    name()
-                }
-            }
             projects.each { String project ->
                 view("${project}-pipeline", type: BuildPipelineView) {
                     filterBuildQueue()
