@@ -3,14 +3,14 @@ def organization = 'microhackathon-2015-03-juglodz'
 def reposApi = new URL("https://api.github.com/orgs/${organization}/repos")
 def repos = new groovy.json.JsonSlurper().parse(reposApi.newReader())
 
-repos.each {
-    def projectName = it.name
+List projectToCode = repos.collect {
+    String projectName = it.name
+    return !(projectName == "${organization}.github.io" || projectName == "properties")
+}
+projectToCode.each {
+    String projectName = it.name
     def projectGitRepo = it.clone_url
 
-    if (projectName == "${organization}.github.io" || projectName == "properties") {
-        return
-    }
-    
     job("${projectName}-build") {
         deliveryPipelineConfiguration('Build')
         wrappers {
@@ -32,7 +32,7 @@ repos.each {
             }
         }
     }
-    
+
     job("${projectName}-publish") {
         deliveryPipelineConfiguration('Build')
         wrappers {
@@ -54,7 +54,7 @@ repos.each {
             }
         }
     }
-    
+
     job("${projectName}-deploy-stub-runner") {
         deliveryPipelineConfiguration('Smoke tests')
         wrappers {
@@ -76,7 +76,7 @@ repos.each {
             }
         }
     }
-    
+
     job("${projectName}-deploy-app") {
         deliveryPipelineConfiguration('Smoke tests')
         wrappers {
@@ -98,7 +98,7 @@ repos.each {
             }
         }
     }
-    
+
     job("${projectName}-run-smoke-tests") {
         deliveryPipelineConfiguration('Smoke tests')
         wrappers {
@@ -120,7 +120,7 @@ repos.each {
             }
         }
     }
-    
+
     job("${projectName}-deploy-previous-version") {
         deliveryPipelineConfiguration('Smoke tests')
         wrappers {
@@ -142,7 +142,7 @@ repos.each {
             }
         }
     }
-    
+
     job("${projectName}-run-smoke-tests-on-old-jar") {
         deliveryPipelineConfiguration('Smoke tests')
         wrappers {
@@ -164,7 +164,7 @@ repos.each {
             }
         }
     }
-    
+
     job("${projectName}-deploy-to-prod") {
         deliveryPipelineConfiguration('Deploy to prod')
         wrappers {
@@ -177,19 +177,47 @@ repos.each {
             gradle('build -x test')
         }
     }
-    
-    buildPipelineView("${projectName}-pipeline") {
-        filterBuildQueue()
-        filterExecutors()
-        title('Boot-microservice Pipeline')
-        displayedBuilds(5)
-        selectedJob("${projectName}-build")
-        alwaysAllowManualTrigger()
-        showPipelineParameters()
-        refreshFrequency(5)
+}
+
+Map<String, List<String>> realmMultimap = projectToCode.inject([:]) { acc, entry ->
+    String realm = entry.split('-').last()
+    String firstPart = entry - '-' - realm
+    if(acc[realm] == null) {
+        acc[realm] = [firstPart]
+    } else {
+        acc[realm] << firstPart
     }
-    
-    deliveryPipelineView("${projectName}-delivery") {
+    return acc
+}
+
+realmMultimap.each { String realm, List<String> projects ->
+    nestedView(realm) {
+        views {
+            view('overview') {
+                jobs {
+                    regex("^.*-$realm-.*\$")
+                }
+                columns {
+                    status()
+                    name()
+                }
+            }
+            projects.each {
+                buildPipelineView("${it}-pipeline") {
+                    filterBuildQueue()
+                    filterExecutors()
+                    title("${it} Pipeline")
+                    displayedBuilds(5)
+                    selectedJob("${it}-build")
+                    alwaysAllowManualTrigger()
+                    showPipelineParameters()
+                    refreshFrequency(5)
+                }
+            }
+        }
+    }
+
+    deliveryPipelineView("${realm}-delivery") {
         pipelineInstances(1)
         showAggregatedPipeline()
         columns(1)
@@ -199,24 +227,11 @@ repos.each {
         showAvatars()
         showChangeLog()
         pipelines {
-            component('Deploy microservice to production', "${projectName}-build")
+            projects.each {
+                component('Deploy to production', "${it}-build")
+            }
         }
     }
+
 }
 
-nestedView('example-1') {
-    views {
-        view('overview') {
-            jobs {
-                regex('fraud-detection-service-waw-.*')
-            }
-            columns {
-                status()
-                name()
-            }
-        }
-        view('pipeline', type: BuildPipelineView) {
-            selectedJob("fraud-detection-service-waw--build")
-        }
-    }
-}
