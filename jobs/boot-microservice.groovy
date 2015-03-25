@@ -198,8 +198,9 @@ realmMultimap.each { String realm, List<String> projects ->
                     name()
                 }
             }
+            def view = this
             projects.each {
-                buildPipelineView("${it}-pipeline") {
+                view.buildPipelineView("${it}-pipeline") {
                     filterBuildQueue()
                     filterExecutors()
                     title("${it} Pipeline")
@@ -224,7 +225,7 @@ realmMultimap.each { String realm, List<String> projects ->
         showChangeLog()
         pipelines {
             projects.each {
-                component('Deploy to production', "${it}-build")
+                component("Deploy $it to production", "${it}-build")
             }
         }
     }
