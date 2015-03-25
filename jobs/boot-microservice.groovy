@@ -198,7 +198,7 @@ realmMultimap.each { String realm, List<String> projects ->
                     name()
                 }
             }
-            buildPipelineView("test-pipeline") {
+            view('pipeline', type: BuildPipelineView) {
                 filterBuildQueue()
                 filterExecutors()
                 title("test Pipeline")
