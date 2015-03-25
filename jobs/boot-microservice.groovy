@@ -9,9 +9,9 @@ projectToCode.each {
     def projectGitRepo = it.clone_url
 
     job("${projectName}-build") {
-        deliveryPipelineConfiguration('Build')
+        deliveryPipelineConfiguration('Build', 'Build')
         wrappers {
-            deliveryPipelineVersion("""1.0.0.\${GROOVY,script = "return new Date().format('yyyyMMddHHmmss')"}""", true)
+            deliveryPipelineVersion('CD-${BUILD_NUMBER}', true)
         }
         scm {
             git(projectGitRepo, 'master')
@@ -31,7 +31,7 @@ projectToCode.each {
     }
 
     job("${projectName}-publish") {
-        deliveryPipelineConfiguration('Build')
+        deliveryPipelineConfiguration('Build', 'Publish')
         wrappers {
             deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
         }
@@ -53,7 +53,7 @@ projectToCode.each {
     }
 
     job("${projectName}-deploy-stub-runner") {
-        deliveryPipelineConfiguration('Smoke tests')
+        deliveryPipelineConfiguration('Smoke tests', 'Deploy stub-runner')
         wrappers {
             deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
         }
@@ -75,7 +75,7 @@ projectToCode.each {
     }
 
     job("${projectName}-deploy-app") {
-        deliveryPipelineConfiguration('Smoke tests')
+        deliveryPipelineConfiguration('Smoke tests', 'Deploy app')
         wrappers {
             deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
         }
@@ -97,7 +97,7 @@ projectToCode.each {
     }
 
     job("${projectName}-run-smoke-tests") {
-        deliveryPipelineConfiguration('Smoke tests')
+        deliveryPipelineConfiguration('Smoke tests', 'Run smoke tests')
         wrappers {
             deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
         }
@@ -119,7 +119,7 @@ projectToCode.each {
     }
 
     job("${projectName}-deploy-previous-version") {
-        deliveryPipelineConfiguration('Smoke tests')
+        deliveryPipelineConfiguration('Smoke tests', 'Deploy previous version')
         wrappers {
             deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
         }
@@ -141,7 +141,7 @@ projectToCode.each {
     }
 
     job("${projectName}-run-smoke-tests-on-old-jar") {
-        deliveryPipelineConfiguration('Smoke tests')
+        deliveryPipelineConfiguration('Smoke tests', 'Run smoke tests on old jar')
         wrappers {
             deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
         }
@@ -163,7 +163,7 @@ projectToCode.each {
     }
 
     job("${projectName}-deploy-to-prod") {
-        deliveryPipelineConfiguration('Deploy to prod')
+        deliveryPipelineConfiguration('Deploy to prod', 'Deploy to prod')
         wrappers {
             deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
         }
