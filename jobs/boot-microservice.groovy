@@ -3,7 +3,7 @@ def organization = 'microhackathon-2015-03-juglodz'
 def reposApi = new URL("https://api.github.com/orgs/${organization}/repos")
 def repos = new groovy.json.JsonSlurper().parse(reposApi.newReader())
 
-List projectToCode = repos.findAll {!(it.name == "${organization}.github.io" || it.name == "properties")}.collect { it.name }
+List projectToCode = repos.findAll {!(it.name == "${organization}.github.io" || it.name == "properties")}
 projectToCode.each {
     String projectName = it.name
     def projectGitRepo = it.clone_url
@@ -179,8 +179,8 @@ projectToCode.each {
 println projectToCode
 
 Map<String, List<String>> realmMultimap = projectToCode.inject([:]) { acc, entry ->
-    String realm = entry.split('-').last()
-    String firstPart = entry - '-' - realm
+    String realm = entry.name.split('-').last()
+    String firstPart = entry.name - '-' - realm
     if(acc[realm] == null) {
         acc[realm] = [firstPart]
     } else {
