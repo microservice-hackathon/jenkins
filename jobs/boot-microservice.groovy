@@ -1,4 +1,3 @@
-import javaposse.jobdsl.dsl.views.BuildPipelineView
 import pl.wybcz.MicroserviceTemplateBuilder
 
 def organization = 'microhackathon-2015-03-juglodz'
