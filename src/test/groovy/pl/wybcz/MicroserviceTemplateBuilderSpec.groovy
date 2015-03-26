@@ -1,4 +1,4 @@
-package com.dslexample
+package pl.wybcz
 
 import groovy.xml.XmlUtil
 import javaposse.jobdsl.dsl.Job
@@ -7,7 +7,6 @@ import org.custommonkey.xmlunit.DetailedDiff
 import org.custommonkey.xmlunit.Diff
 import org.custommonkey.xmlunit.ElementNameAndAttributeQualifier
 import org.custommonkey.xmlunit.XMLUnit
-import pl.wybcz.MicroserviceTemplateBuilder
 import spock.lang.Specification
 
 class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTrait {

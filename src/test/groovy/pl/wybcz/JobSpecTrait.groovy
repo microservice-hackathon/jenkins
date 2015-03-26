@@ -1,4 +1,4 @@
-package com.dslexample
+package pl.wybcz
 
 import javaposse.jobdsl.dsl.JobManagement
 import javaposse.jobdsl.dsl.JobParent

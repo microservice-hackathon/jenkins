@@ -7,9 +7,6 @@ class MicroserviceTemplateBuilder {
     String projectName
     String projectGitRepo
 
-    MicroserviceTemplateBuilder() {
-    }
-
     List<Job> build(DslFactory dslFactory) {
         return [
                 dslFactory.job("${projectName}-build") {

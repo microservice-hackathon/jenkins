@@ -1,4 +1,4 @@
-package com.dslexample
+package pl.wybcz
 
 import groovy.io.FileType
 import javaposse.jobdsl.dsl.DslScriptLoader
