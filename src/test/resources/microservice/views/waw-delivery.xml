@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><se.diabol.jenkins.pipeline.DeliveryPipelineView>
+    <filterExecutors>false</filterExecutors>
+    <filterQueue>false</filterQueue>
+    <properties class="hudson.model.View$PropertyList"/>
+    <noOfPipelines>0</noOfPipelines>
+    <showAggregatedPipeline>true</showAggregatedPipeline>
+    <noOfColumns>1</noOfColumns>
+    <sorting>none</sorting>
+    <showAvatars>true</showAvatars>
+    <updateInterval>5</updateInterval>
+    <showChanges>true</showChanges>
+    <allowManualTriggers>true</allowManualTriggers>
+    <componentSpecs>
+        <se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+            <name>Deploy build-waw to production</name>
+            <firstJob>build-waw-build</firstJob>
+        </se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+        <se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+            <name>Deploy publish-waw to production</name>
+            <firstJob>publish-waw-build</firstJob>
+        </se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+    </componentSpecs>
+</se.diabol.jenkins.pipeline.DeliveryPipelineView>

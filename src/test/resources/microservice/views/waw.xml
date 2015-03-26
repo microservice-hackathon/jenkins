@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><hudson.plugins.nested__view.NestedView>
+    <filterExecutors>false</filterExecutors>
+    <filterQueue>false</filterQueue>
+    <properties class="hudson.model.View$PropertyList"/>
+    <views>
+        <au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
+            <filterExecutors>true</filterExecutors>
+            <filterQueue>true</filterQueue>
+            <properties class="hudson.model.View$PropertyList"/>
+            <noOfDisplayedBuilds>5</noOfDisplayedBuilds>
+            <buildViewTitle>build-waw Pipeline</buildViewTitle>
+            <consoleOutputLinkStyle>Lightbox</consoleOutputLinkStyle>
+            <cssUrl/>
+            <triggerOnlyLatestJob>false</triggerOnlyLatestJob>
+            <alwaysAllowManualTrigger>true</alwaysAllowManualTrigger>
+            <showPipelineParameters>true</showPipelineParameters>
+            <showPipelineParametersInHeaders>false</showPipelineParametersInHeaders>
+            <refreshFrequency>5</refreshFrequency>
+            <showPipelineDefinitionHeader>false</showPipelineDefinitionHeader>
+            <selectedJob>build-waw-build</selectedJob>
+            <name>build-waw-pipeline</name>
+            <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+        </au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
+        <au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
+            <filterExecutors>true</filterExecutors>
+            <filterQueue>true</filterQueue>
+            <properties class="hudson.model.View$PropertyList"/>
+            <noOfDisplayedBuilds>5</noOfDisplayedBuilds>
+            <buildViewTitle>publish-waw Pipeline</buildViewTitle>
+            <consoleOutputLinkStyle>Lightbox</consoleOutputLinkStyle>
+            <cssUrl/>
+            <triggerOnlyLatestJob>false</triggerOnlyLatestJob>
+            <alwaysAllowManualTrigger>true</alwaysAllowManualTrigger>
+            <showPipelineParameters>true</showPipelineParameters>
+            <showPipelineParametersInHeaders>false</showPipelineParametersInHeaders>
+            <refreshFrequency>5</refreshFrequency>
+            <showPipelineDefinitionHeader>false</showPipelineDefinitionHeader>
+            <selectedJob>publish-waw-build</selectedJob>
+            <name>publish-waw-pipeline</name>
+            <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+        </au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
+    </views>
+</hudson.plugins.nested__view.NestedView>

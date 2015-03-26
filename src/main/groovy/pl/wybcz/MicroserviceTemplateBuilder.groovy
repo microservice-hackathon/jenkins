@@ -185,15 +185,17 @@ class MicroserviceTemplateBuilder {
         return [
                     dslFactory.nestedView(realm) {
                         views {
-                            view("${projectName}-pipeline", type: ViewType.BuildPipelineView) {
-                                filterBuildQueue()
-                                filterExecutors()
-                                title("${projectName} Pipeline")
-                                displayedBuilds(5)
-                                selectedJob("${projectName}-build")
-                                alwaysAllowManualTrigger()
-                                showPipelineParameters()
-                                refreshFrequency(5)
+                            projects.each { String projectName ->
+                                view("${projectName}-pipeline", type: ViewType.BuildPipelineView) {
+                                    filterBuildQueue()
+                                    filterExecutors()
+                                    title("${projectName} Pipeline")
+                                    displayedBuilds(5)
+                                    selectedJob("${projectName}-build")
+                                    alwaysAllowManualTrigger()
+                                    showPipelineParameters()
+                                    refreshFrequency(5)
+                                }
                             }
                         }
                     }
