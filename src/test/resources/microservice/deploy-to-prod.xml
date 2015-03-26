@@ -1,0 +1,61 @@
+<project>
+    <actions/>
+    <description/>
+    <keepDependencies>false</keepDependencies>
+    <properties>
+        <se.diabol.jenkins.pipeline.PipelineProperty>
+            <taskName>Deploy to prod</taskName>
+            <stageName>Deploy to prod</stageName>
+        </se.diabol.jenkins.pipeline.PipelineProperty>
+    </properties>
+    <canRoam>true</canRoam>
+    <disabled>false</disabled>
+    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <triggers class="vector"/>
+    <concurrentBuild>false</concurrentBuild>
+    <builders>
+        <hudson.plugins.gradle.Gradle>
+            <description></description>
+            <switches></switches>
+            <tasks>build -x test</tasks>
+            <rootBuildScriptDir></rootBuildScriptDir>
+            <buildFile></buildFile>
+            <gradleName>(Default)</gradleName>
+            <useWrapper>true</useWrapper>
+            <makeExecutable>false</makeExecutable>
+            <fromRootBuildScriptDir>true</fromRootBuildScriptDir>
+        </hudson.plugins.gradle.Gradle>
+    </builders>
+    <publishers/>
+    <buildWrappers>
+        <se.diabol.jenkins.pipeline.PipelineVersionContributor>
+            <versionTemplate>${ENV,var="PIPELINE_VERSION"}</versionTemplate>
+            <updateDisplayName>true</updateDisplayName>
+        </se.diabol.jenkins.pipeline.PipelineVersionContributor>
+    </buildWrappers>
+    <scm class="hudson.plugins.git.GitSCM">
+        <userRemoteConfigs>
+            <hudson.plugins.git.UserRemoteConfig>
+                <url>git@github.com:example/example.git</url>
+            </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+            <hudson.plugins.git.BranchSpec>
+                <name>master</name>
+            </hudson.plugins.git.BranchSpec>
+        </branches>
+        <configVersion>2</configVersion>
+        <disableSubmodules>false</disableSubmodules>
+        <recursiveSubmodules>false</recursiveSubmodules>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <authorOrCommitter>false</authorOrCommitter>
+        <clean>false</clean>
+        <wipeOutWorkspace>false</wipeOutWorkspace>
+        <pruneBranches>false</pruneBranches>
+        <remotePoll>false</remotePoll>
+        <ignoreNotifyCommit>false</ignoreNotifyCommit>
+        <gitTool>Default</gitTool>
+        <skipTag>false</skipTag>
+    </scm>
+</project>
