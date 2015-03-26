@@ -1,13 +1,15 @@
 package pl.wybcz
-
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.Job
+import javaposse.jobdsl.dsl.View
 
 class MicroserviceTemplateBuilder {
     String projectName
     String projectGitRepo
+    String realm
+    List<String> projects
 
-    List<Job> build(DslFactory dslFactory) {
+    List<Job> buildJobs(DslFactory dslFactory) {
         return [
                 dslFactory.job("${projectName}-build") {
                     deliveryPipelineConfiguration('Build', 'Build')
@@ -176,5 +178,41 @@ class MicroserviceTemplateBuilder {
                     }
                 }
             ]
+    }
+
+    List<View> buildViews(DslFactory dslFactory) {
+        return [
+                    dslFactory.nestedView(realm) {
+                        views {
+                            projects.each { String project ->
+                                dslFactory.buildPipelineView("${project}-pipeline") {
+                                    filterBuildQueue()
+                                    filterExecutors()
+                                    title("${project} Pipeline")
+                                    displayedBuilds(5)
+                                    selectedJob("${project}-build")
+                                    alwaysAllowManualTrigger()
+                                    showPipelineParameters()
+                                    refreshFrequency(5)
+                                }
+                            }
+                        }
+                    }
+                    ,
+                    dslFactory.deliveryPipelineView("${realm}-delivery") {
+                        pipelineInstances(0)
+                        showAggregatedPipeline()
+                        columns(1)
+                        updateInterval(5)
+                        enableManualTriggers()
+                        showAvatars()
+                        showChangeLog()
+                        pipelines {
+                            projects.each {
+                                component("Deploy $it to production", "${it}-build")
+                            }
+                        }
+                    }
+                ]
     }
 }

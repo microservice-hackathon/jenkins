@@ -23,7 +23,7 @@ class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTr
             )
 
         when:
-            List<Job> jobs = builder.build(jobParent)
+            List<Job> jobs = builder.buildJobs(jobParent)
 
         then:
             jobs.each {
