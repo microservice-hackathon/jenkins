@@ -2,6 +2,7 @@ package pl.wybcz
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.Job
 import javaposse.jobdsl.dsl.View
+import javaposse.jobdsl.dsl.ViewType
 
 class MicroserviceTemplateBuilder {
     String projectName
@@ -184,17 +185,15 @@ class MicroserviceTemplateBuilder {
         return [
                     dslFactory.nestedView(realm) {
                         views {
-                            projects.each { String project ->
-                                dslFactory.buildPipelineView("${project}-pipeline") {
-                                    filterBuildQueue()
-                                    filterExecutors()
-                                    title("${project} Pipeline")
-                                    displayedBuilds(5)
-                                    selectedJob("${project}-build")
-                                    alwaysAllowManualTrigger()
-                                    showPipelineParameters()
-                                    refreshFrequency(5)
-                                }
+                            view("${projectName}-pipeline", type: ViewType.BuildPipelineView) {
+                                filterBuildQueue()
+                                filterExecutors()
+                                title("${projectName} Pipeline")
+                                displayedBuilds(5)
+                                selectedJob("${projectName}-build")
+                                alwaysAllowManualTrigger()
+                                showPipelineParameters()
+                                refreshFrequency(5)
                             }
                         }
                     }

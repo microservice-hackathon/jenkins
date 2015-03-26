@@ -23,6 +23,12 @@ dependencies {
     testCompile 'xmlunit:xmlunit:1.6'
 }
 
+test {
+    testLogging {
+        exceptionFormat = 'full'
+    }
+}
+
 task workspace(type: Copy) {
     from fileTree(dir: 'jobs')
     from 'src/main/groovy'
