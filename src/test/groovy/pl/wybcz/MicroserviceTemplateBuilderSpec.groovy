@@ -3,8 +3,10 @@ package pl.wybcz
 import javaposse.jobdsl.dsl.Job
 import javaposse.jobdsl.dsl.JobParent
 import javaposse.jobdsl.dsl.View
+import org.junit.Ignore
 import spock.lang.Specification
 
+@Ignore
 class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTrait, XmlComparator {
 
     private static final String JOB_NAME = 'test-job'
