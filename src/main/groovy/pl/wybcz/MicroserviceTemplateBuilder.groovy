@@ -1,13 +1,10 @@
 package pl.wybcz
 
-import groovy.transform.CompileDynamic
-import groovy.transform.CompileStatic
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.Job
 import javaposse.jobdsl.dsl.View
 import javaposse.jobdsl.dsl.ViewType
 
-@CompileStatic
 class MicroserviceTemplateBuilder {
 
     private final DslFactory dslFactory
@@ -187,7 +184,6 @@ class MicroserviceTemplateBuilder {
             ]
     }
 
-    @CompileDynamic
     List<View> buildViews(String realm, List<String> projects) {
         return [
                     dslFactory.nestedView(realm) {
