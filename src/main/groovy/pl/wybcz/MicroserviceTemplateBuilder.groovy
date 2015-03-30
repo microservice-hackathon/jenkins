@@ -8,9 +8,23 @@ import javaposse.jobdsl.dsl.ViewType
 class MicroserviceTemplateBuilder {
 
     private final DslFactory dslFactory
+    private final GithubPrBuilder githubPrBuilder
+    private final String organizationUrl
+    private final String cronToPollScm
+    private final String organizationName
+    private final List<String> whitelistedUsers
 
-    MicroserviceTemplateBuilder(DslFactory dslFactory) {
+    MicroserviceTemplateBuilder(DslFactory dslFactory,
+    String organizationUrl ,
+    String cronToPollScm,
+    String organizationName,
+    List<String> whitelistedUsers) {
         this.dslFactory = dslFactory
+        this.githubPrBuilder = new GithubPrBuilder(dslFactory)
+        this.organizationUrl = organizationUrl
+        this.cronToPollScm = cronToPollScm
+        this.organizationName = organizationName
+        this.whitelistedUsers = whitelistedUsers
     }
 
     List<Job> buildJobs(String projectName, String projectGitRepo) {
@@ -181,6 +195,8 @@ class MicroserviceTemplateBuilder {
                         gradle('build -x test')
                     }
                 }
+                ,
+                githubPrBuilder.buildPrJob(organizationUrl, projectName, cronToPollScm, organizationName, whitelistedUsers)
             ]
     }
 

@@ -7,12 +7,19 @@ def repos = new groovy.json.JsonSlurper().parse(reposApi.newReader())
 
 List projectToCode = repos.findAll {!(it.name == "${organization}.github.io" || it.name == "properties")}
 
+MicroserviceTemplateBuilder microserviceTemplateBuilder = new MicroserviceTemplateBuilder(this,
+        'https://github.com/microhackathon-2015-03-juglodz',
+        '*/2 * * * *',
+        organization,
+        ['microservice-hackathon-bot']
+)
+
 projectToCode.each {
-    new MicroserviceTemplateBuilder(this).buildJobs(it.name, it.clone_url)
+    microserviceTemplateBuilder.buildJobs(it.name, it.clone_url)
 }
 
 Map<String, List<String>> realmMultimap = new HackathonRealmParser().convertToRealmMultimap(projectToCode)
 realmMultimap.each { String realm, List<String> projects ->
-    new MicroserviceTemplateBuilder(this).buildViews(realm, projects)
+    microserviceTemplateBuilder.buildViews(realm, projects)
 }
 
