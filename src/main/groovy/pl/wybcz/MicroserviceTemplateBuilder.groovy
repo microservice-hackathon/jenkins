@@ -43,7 +43,7 @@ class MicroserviceTemplateBuilder {
                         git(projectGitRepo, 'master')
                     }
                     steps {
-                        gradle('build -x test')
+                        gradle('build -x test --info')
                     }
                     publishers {
                         downstreamParameterized {
