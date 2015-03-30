@@ -1,16 +1,11 @@
 package pl.wybcz
 
-import groovy.xml.XmlUtil
 import javaposse.jobdsl.dsl.Job
 import javaposse.jobdsl.dsl.JobParent
 import javaposse.jobdsl.dsl.View
-import org.custommonkey.xmlunit.DetailedDiff
-import org.custommonkey.xmlunit.Diff
-import org.custommonkey.xmlunit.ElementNameAndAttributeQualifier
-import org.custommonkey.xmlunit.XMLUnit
 import spock.lang.Specification
 
-class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTrait {
+class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTrait, XmlComparator {
 
     private static final String JOB_NAME = 'test-job'
 
@@ -18,13 +13,10 @@ class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTr
 
     void 'test XML output for jobs'() {
         given:
-            MicroserviceTemplateBuilder builder = new MicroserviceTemplateBuilder(
-                projectName: JOB_NAME,
-                projectGitRepo: 'git@github.com:example/example.git'
-            )
+            MicroserviceTemplateBuilder builder = new MicroserviceTemplateBuilder(jobParent)
 
         when:
-            List<Job> jobs = builder.buildJobs(jobParent)
+            List<Job> jobs = builder.buildJobs(JOB_NAME, 'git@github.com:example/example.git')
 
         then:
             jobs.each {
@@ -34,13 +26,10 @@ class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTr
 
     void 'test XML output for views'() {
         given:
-            MicroserviceTemplateBuilder builder = new MicroserviceTemplateBuilder(
-                realm: 'waw',
-                projects: ['build-waw', 'publish-waw']
-            )
+            MicroserviceTemplateBuilder builder = new MicroserviceTemplateBuilder(jobParent)
 
         when:
-            List<View> views = builder.buildViews(jobParent)
+            List<View> views = builder.buildViews('waw', ['build-waw', 'publish-waw'])
 
         then:
             views.each {
@@ -58,22 +47,4 @@ class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTr
         compareXmls("/microservice/views/${fileName}.xml", view.node)
     }
 
-    private static void compareXmls(String file, Node nodeToCompare) {
-        String referenceXml = XmlUtil.serialize(new File(MicroserviceTemplateBuilderSpec.getResource(file).file).text.stripIndent().stripMargin())
-        String nodeXml = XmlUtil.serialize(nodeToCompare).stripIndent().stripMargin()
-        Diff diff = XMLUnit.compareXML(referenceXml, nodeXml)
-        XMLUnit.setIgnoreWhitespace(true)
-        diff.overrideElementQualifier(new ElementNameAndAttributeQualifier())
-        if (!diff.similar()) {
-            DetailedDiff detailedDiff = new DetailedDiff(diff)
-            throw new XmlsAreNotSimillar(file, detailedDiff.allDifferences)
-        }
-    }
-
-
-    static class XmlsAreNotSimillar extends RuntimeException {
-        XmlsAreNotSimillar(String file, List diffs) {
-            super("For file [$file] the following differences where found [$diffs]")
-        }
-    }
 }
