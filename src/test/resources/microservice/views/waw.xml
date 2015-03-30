@@ -21,6 +21,27 @@
             <name>build-waw-pipeline</name>
             <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
         </au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
+        <hudson.model.ListView>
+            <filterExecutors>false</filterExecutors>
+            <filterQueue>false</filterQueue>
+            <properties class="hudson.model.View$PropertyList"/>
+            <jobNames class="tree-set">
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+                <string>build-waw-pr-build</string>
+            </jobNames>
+            <jobFilters/>
+            <columns>
+                <hudson.views.StatusColumn/>
+                <hudson.views.WeatherColumn/>
+                <hudson.views.JobColumn/>
+                <hudson.views.LastSuccessColumn/>
+                <hudson.views.LastFailureColumn/>
+                <hudson.views.LastDurationColumn/>
+                <hudson.views.BuildButtonColumn/>
+            </columns>
+            <name>build-waw-pr</name>
+            <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+        </hudson.model.ListView>
         <au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
             <filterExecutors>true</filterExecutors>
             <filterQueue>true</filterQueue>
@@ -39,5 +60,26 @@
             <name>publish-waw-pipeline</name>
             <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
         </au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
+        <hudson.model.ListView>
+            <filterExecutors>false</filterExecutors>
+            <filterQueue>false</filterQueue>
+            <properties class="hudson.model.View$PropertyList"/>
+            <jobNames class="tree-set">
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+                <string>publish-waw-pr-build</string>
+            </jobNames>
+            <jobFilters/>
+            <columns>
+                <hudson.views.StatusColumn/>
+                <hudson.views.WeatherColumn/>
+                <hudson.views.JobColumn/>
+                <hudson.views.LastSuccessColumn/>
+                <hudson.views.LastFailureColumn/>
+                <hudson.views.LastDurationColumn/>
+                <hudson.views.BuildButtonColumn/>
+            </columns>
+            <name>publish-waw-pr</name>
+            <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+        </hudson.model.ListView>
     </views>
 </hudson.plugins.nested__view.NestedView>

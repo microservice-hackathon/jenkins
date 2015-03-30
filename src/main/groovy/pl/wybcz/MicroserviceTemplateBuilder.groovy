@@ -203,6 +203,20 @@ class MicroserviceTemplateBuilder {
                                     showPipelineParameters()
                                     refreshFrequency(5)
                                 }
+                                view("${projectName}-pr", type: ViewType.ListView) {
+                                    jobs{
+                                        name("${projectName}-pr-build")
+                                    }
+                                    columns {
+                                        status()
+                                        weather()
+                                        name()
+                                        lastSuccess()
+                                        lastFailure()
+                                        lastDuration()
+                                        buildButton()
+                                    }
+                                }
                             }
                         }
                     }
