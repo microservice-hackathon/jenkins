@@ -1,4 +1,5 @@
 package pl.wybcz
+
 import javaposse.jobdsl.dsl.DslFactory
 
 class MicroserviceTemplateBuilder {
@@ -36,8 +37,14 @@ class MicroserviceTemplateBuilder {
     }
 
     void buildViews() {
-        Map<String, List<String>> realmMultimap = new HackathonRealmParser().convertToRealmMultimap(projects)
+        Map<String, List<String>> realmMultimap = new SuffixRealmParser().convertToRealmMultimap(projects)
         realmMultimap.each { String realm, List<String> projects ->
+            new MicroserviceViewsBuilder(dslFactory).buildViews(realm, projects)
+        }
+    }
+
+    void buildViews(RealmConverter realmConverter) {
+        realmConverter.convertToRealmMultimap(projects).each { String realm, List<String> projects ->
             new MicroserviceViewsBuilder(dslFactory).buildViews(realm, projects)
         }
     }
