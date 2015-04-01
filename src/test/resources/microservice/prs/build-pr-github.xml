@@ -81,9 +81,7 @@
         <skipTag>true</skipTag>
     </scm>
     <publishers>
-        <com.cloudbees.jenkins.GitHubCommitNotifier>
-            <resultOnFailure>FAILURE</resultOnFailure>
-        </com.cloudbees.jenkins.GitHubCommitNotifier>
+        <com.cloudbees.jenkins.GitHubCommitNotifier/>
     </publishers>
     <buildWrappers/>
 </project>

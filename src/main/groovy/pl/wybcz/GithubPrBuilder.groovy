@@ -58,10 +58,7 @@ class GithubPrBuilder implements PrBuilder {
                 gradle('clean build')
             }
             publishers {
-                configure {  Node project ->
-                    def githubCommitNotifier = project / 'publishers' / 'com.cloudbees.jenkins.GitHubCommitNotifier'
-                    (githubCommitNotifier / 'resultOnFailure').setValue('FAILURE')
-                }
+                githubCommitNotifier()
             }
         }
     }
