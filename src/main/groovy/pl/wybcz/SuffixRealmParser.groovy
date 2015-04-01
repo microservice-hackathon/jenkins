@@ -1,8 +1,9 @@
 package pl.wybcz
 
-class HackathonRealmParser {
+class SuffixRealmParser implements RealmConverter {
 
-    Map<String, List<String>> convertToRealmMultimap(List projectToCode) {
+    @Override
+    Map<String, List<String>> convertToRealmMultimap(List<GitProject> projectToCode) {
         Map emptyMultimap = [:].withDefault { [] }
         return projectToCode.inject(emptyMultimap) { Map acc, entry ->
             String realm = entry.name.split('-').last()
