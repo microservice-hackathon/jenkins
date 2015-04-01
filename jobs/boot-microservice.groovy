@@ -9,12 +9,12 @@ List projectToCode = repos.findAll {!(it.name == "${organization}.github.io" || 
 
 MicroserviceTemplateBuilder.pipeline(this) {
     forProjects projectToCode.collect { new GitProject(it.name, it.clone_url) }
-    /*buildGithubPrs {
+    buildGithubPrs {
         organizationUrl 'https://github.com/microhackathon-2015-03-juglodz'
-        cronToPollScm '*//*2 * * * *'
+        cronToPollScm '*/2 * * * *'
         organizationName organization
         whitelistedUsers(['microservice-hackathon-bot'])
-    }*/
+    }
     buildJobs()
     buildViews()
 }

@@ -10,7 +10,7 @@ class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTr
 
     JobParent jobParent = createJobParent()
 
-    void 'test XML output for jobs'() {
+    void 'should generate proper job XMLs'() {
         given:
             MicroserviceTemplateBuilder.pipeline(jobParent) {
                 forProjects([new GitProject(JOB_NAME, 'git@github.com:example/example.git')])
@@ -26,7 +26,32 @@ class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTr
             }
     }
 
-    void 'test XML output for views'() {
+    void 'should generate proper job with github pr building'() {
+        given:
+            MicroserviceTemplateBuilder.pipeline(jobParent) {
+                forProjects([new GitProject(JOB_NAME, 'git@github.com:example/example.git')])
+                buildGithubPrs {
+                    organizationUrl 'https://github.com/microhackathon-2015-03-juglodz'
+                    cronToPollScm '*/2 * * * *'
+                    organizationName 'microhackathon-2015-03-juglodz'
+                    whitelistedUsers(['microservice-hackathon-bot'])
+                }
+                buildJobs()
+            }
+
+        when:
+            Set<Item> jobs = jobParent.getReferencedJobs()
+        then:
+            allJobsWereCreatedIncludingPrBuild(jobs)
+
+    }
+
+    private void  allJobsWereCreatedIncludingPrBuild(Set<Item> jobs) {
+        assert jobs.size() == 9
+        assert jobs.collect { it.name }.contains('test-job-pr-build')
+    }
+
+    void 'should generate proper views XMLs'() {
         given:
             MicroserviceTemplateBuilder.pipeline(jobParent) {
                 forProjects([
