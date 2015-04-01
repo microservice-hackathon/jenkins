@@ -1,4 +1,4 @@
-import pl.wybcz.HackathonRealmParser
+import pl.wybcz.GitProject
 import pl.wybcz.MicroserviceTemplateBuilder
 
 def organization = 'microhackathon-2015-03-juglodz'
@@ -7,19 +7,16 @@ def repos = new groovy.json.JsonSlurper().parse(reposApi.newReader())
 
 List projectToCode = repos.findAll {!(it.name == "${organization}.github.io" || it.name == "properties")}
 
-MicroserviceTemplateBuilder microserviceTemplateBuilder = new MicroserviceTemplateBuilder(this,
-        'https://github.com/microhackathon-2015-03-juglodz',
-        '*/2 * * * *',
-        organization,
-        ['microservice-hackathon-bot']
-)
-
-projectToCode.each {
-    microserviceTemplateBuilder.buildJobs(it.name, it.clone_url)
+MicroserviceTemplateBuilder.pipeline(this) {
+    forProjects projectToCode.collect { new GitProject(it.name, it.clone_url) }
+    /*buildGithubPrs {
+        organizationUrl 'https://github.com/microhackathon-2015-03-juglodz'
+        cronToPollScm '*//*2 * * * *'
+        organizationName organization
+        whitelistedUsers(['microservice-hackathon-bot'])
+    }*/
+    buildJobs()
+    buildViews()
 }
 
-Map<String, List<String>> realmMultimap = new HackathonRealmParser().convertToRealmMultimap(projectToCode)
-realmMultimap.each { String realm, List<String> projects ->
-    microserviceTemplateBuilder.buildViews(realm, projects)
-}
 

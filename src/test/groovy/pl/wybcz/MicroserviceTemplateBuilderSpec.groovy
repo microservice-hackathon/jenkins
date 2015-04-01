@@ -1,12 +1,9 @@
 package pl.wybcz
-
-import javaposse.jobdsl.dsl.Job
+import javaposse.jobdsl.dsl.Item
 import javaposse.jobdsl.dsl.JobParent
 import javaposse.jobdsl.dsl.View
-import org.junit.Ignore
 import spock.lang.Specification
 
-@Ignore
 class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTrait, XmlComparator {
 
     private static final String JOB_NAME = 'test-job'
@@ -15,10 +12,13 @@ class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTr
 
     void 'test XML output for jobs'() {
         given:
-            MicroserviceTemplateBuilder builder = new MicroserviceTemplateBuilder(jobParent)
+            MicroserviceTemplateBuilder.pipeline(jobParent) {
+                forProjects([new GitProject(JOB_NAME, 'git@github.com:example/example.git')])
+                buildJobs()
+            }
 
         when:
-            List<Job> jobs = builder.buildJobs(JOB_NAME, 'git@github.com:example/example.git')
+            Set<Item> jobs = jobParent.getReferencedJobs()
 
         then:
             jobs.each {
@@ -28,10 +28,15 @@ class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTr
 
     void 'test XML output for views'() {
         given:
-            MicroserviceTemplateBuilder builder = new MicroserviceTemplateBuilder(jobParent)
-
+            MicroserviceTemplateBuilder.pipeline(jobParent) {
+                forProjects([
+                        new GitProject('build-waw', 'git@github.com:example/example.git'),
+                        new GitProject('publish-waw', 'git@github.com:example/example.git')
+                ])
+                buildViews()
+            }
         when:
-            List<View> views = builder.buildViews('waw', ['build-waw', 'publish-waw'])
+            Set<View> views = jobParent.getReferencedViews()
 
         then:
             views.each {
@@ -39,7 +44,7 @@ class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTr
             }
     }
 
-    void assertThatJobIsOk(Job job) {
+    void assertThatJobIsOk(Item job) {
         String fileName = job.name - "$JOB_NAME-"
         compareXmls("/microservice/jobs/${fileName}.xml", job.node)
     }

@@ -3,19 +3,32 @@ package pl.wybcz
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.Job
 
-class GithubPrBuilder {
+class GithubPrBuilder implements PrBuilder {
 
-    private final DslFactory dslFactory
+    DslFactory dslFactory
+    String organizationUrl
+    String cronToPollScm
+    String organizationName
+    List<String> whitelistedUsers
 
-    GithubPrBuilder(DslFactory dslFactory) {
-        this.dslFactory = dslFactory
+    void organizationUrl(String organizationUrl) {
+        this.organizationUrl = organizationUrl
     }
 
-    Job buildPrJob(String organizationUrl,
-                   String projectName,
-                   String cronToPollScm,
-                   String organizationName,
-                   List<String> whitelistedUsers) {
+    void cronToPollScm(String cronToPollScm) {
+        this.cronToPollScm = cronToPollScm
+    }
+
+    void organizationName(String organizationName) {
+        this.organizationName = organizationName
+    }
+
+    void whitelistedUsers(List<String> whitelistedUsers) {
+        this.whitelistedUsers = whitelistedUsers
+    }
+
+    @Override
+    Job buildPrJob(String projectName) {
         return dslFactory.freeStyleJob("$projectName-pr-build") {
             configure { Node projectNode ->
                 appendProperties(projectNode, "$organizationUrl/$projectName/")
