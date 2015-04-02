@@ -1,5 +1,5 @@
-import pl.wybcz.GitProject
-import pl.wybcz.MicroserviceTemplateBuilder
+import pl.wybcz.pipeline.domain.GitProject
+import pl.wybcz.pipeline.template.MicroserviceTemplateBuilder
 
 def organization = 'microhackathon-test'
 def reposApi = new URL("https://api.github.com/orgs/${organization}/repos")

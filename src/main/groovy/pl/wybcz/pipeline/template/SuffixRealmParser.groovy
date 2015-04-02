@@ -1,4 +1,6 @@
-package pl.wybcz
+package pl.wybcz.pipeline.template
+
+import pl.wybcz.pipeline.domain.GitProject
 
 class SuffixRealmParser implements RealmConverter {
 

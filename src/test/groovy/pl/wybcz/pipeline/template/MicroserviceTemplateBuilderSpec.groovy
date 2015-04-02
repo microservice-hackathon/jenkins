@@ -1,7 +1,10 @@
-package pl.wybcz
+package pl.wybcz.pipeline.template
 import javaposse.jobdsl.dsl.Item
 import javaposse.jobdsl.dsl.JobParent
 import javaposse.jobdsl.dsl.View
+import pl.wybcz.pipeline.util.JobSpecTrait
+import pl.wybcz.pipeline.util.XmlComparator
+import pl.wybcz.pipeline.domain.GitProject
 import spock.lang.Specification
 
 class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTrait, XmlComparator {

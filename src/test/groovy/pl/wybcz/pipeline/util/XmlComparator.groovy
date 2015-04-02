@@ -1,10 +1,11 @@
-package pl.wybcz
+package pl.wybcz.pipeline.util
 
 import groovy.xml.XmlUtil
 import org.custommonkey.xmlunit.DetailedDiff
 import org.custommonkey.xmlunit.Diff
 import org.custommonkey.xmlunit.ElementNameAndAttributeQualifier
 import org.custommonkey.xmlunit.XMLUnit
+import pl.wybcz.pipeline.template.MicroserviceTemplateBuilderSpec
 
 trait XmlComparator {
 

@@ -1,7 +1,9 @@
-package pl.wybcz
+package pl.wybcz.pipeline.pr
 
 import javaposse.jobdsl.dsl.Job
 import javaposse.jobdsl.dsl.JobParent
+import pl.wybcz.pipeline.util.JobSpecTrait
+import pl.wybcz.pipeline.util.XmlComparator
 import spock.lang.Specification
 
 class GithubPrBuilderSpec extends Specification implements JobSpecTrait, XmlComparator {

@@ -1,4 +1,4 @@
-package pl.wybcz
+package pl.wybcz.pipeline.template
 
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.View

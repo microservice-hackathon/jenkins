@@ -1,5 +1,6 @@
-package pl.wybcz
+package pl.wybcz.pipeline.template
 
+import pl.wybcz.pipeline.domain.GitProject
 import spock.lang.Specification
 
 class SuffixRealmParserSpec extends Specification {

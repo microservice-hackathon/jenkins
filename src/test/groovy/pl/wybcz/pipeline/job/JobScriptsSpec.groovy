@@ -1,4 +1,4 @@
-package pl.wybcz
+package pl.wybcz.pipeline.job
 
 import groovy.io.FileType
 import javaposse.jobdsl.dsl.DslScriptLoader

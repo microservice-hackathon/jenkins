@@ -1,6 +1,9 @@
-package pl.wybcz
+package pl.wybcz.pipeline.template
 
 import javaposse.jobdsl.dsl.DslFactory
+import pl.wybcz.pipeline.domain.GitProject
+import pl.wybcz.pipeline.pr.PrBuilder
+import pl.wybcz.pipeline.pr.GithubPrBuilder
 
 class MicroserviceTemplateBuilder {
 

@@ -1,4 +1,4 @@
-package pl.wybcz
+package pl.wybcz.pipeline.util
 
 import javaposse.jobdsl.dsl.JobManagement
 import javaposse.jobdsl.dsl.JobParent

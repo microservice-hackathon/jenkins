@@ -1,4 +1,4 @@
-package pl.wybcz
+package pl.wybcz.pipeline.pr
 
 import javaposse.jobdsl.dsl.Job
 

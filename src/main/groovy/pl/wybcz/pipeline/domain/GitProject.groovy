@@ -1,4 +1,4 @@
-package pl.wybcz
+package pl.wybcz.pipeline.domain
 
 import groovy.transform.Immutable
 
