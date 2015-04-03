@@ -1,0 +1,63 @@
+<project>
+    <actions/>
+    <description/>
+    <keepDependencies>false</keepDependencies>
+    <properties/>
+    <canRoam>true</canRoam>
+    <disabled>false</disabled>
+    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <concurrentBuild>false</concurrentBuild>
+    <builders/>
+    <publishers/>
+    <buildWrappers/>
+    <scm class="hudson.plugins.git.GitSCM">
+        <userRemoteConfigs>
+            <hudson.plugins.git.UserRemoteConfig>
+                <name>origin</name>
+                <url>
+                    ssh://git@stash.host.net/${projectCode}/${repositoryName}.git
+                </url>
+            </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+            <hudson.plugins.git.BranchSpec>
+                <name>*/${sourceBranch}</name>
+            </hudson.plugins.git.BranchSpec>
+        </branches>
+        <configVersion>2</configVersion>
+        <disableSubmodules>false</disableSubmodules>
+        <recursiveSubmodules>false</recursiveSubmodules>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <authorOrCommitter>false</authorOrCommitter>
+        <clean>false</clean>
+        <wipeOutWorkspace>false</wipeOutWorkspace>
+        <pruneBranches>false</pruneBranches>
+        <remotePoll>false</remotePoll>
+        <ignoreNotifyCommit>false</ignoreNotifyCommit>
+        <gitTool>Default</gitTool>
+        <skipTag>true</skipTag>
+        <extensions>
+            <hudson.plugins.git.extensions.impl.PreBuildMerge>
+                <options>
+                    <mergeRemote>origin</mergeRemote>
+                    <mergeTarget>${targetBranch}</mergeTarget>
+                    <mergeStrategy>default</mergeStrategy>
+                    <fastForwardMode>FF</fastForwardMode>
+                </options>
+            </hudson.plugins.git.extensions.impl.PreBuildMerge>
+        </extensions>
+    </scm>
+    <triggers class="vector">
+        <stashpullrequestbuilder.stashpullrequestbuilder.StashBuildTrigger>
+            <spec>* * * * *</spec>
+            <cron>* * * * *</cron>
+            <stashHost>stash.host.net</stashHost>
+            <username>username</username>
+            <password>password</password>
+            <projectCode>PROJECT_CODE</projectCode>
+            <repositoryName>REPO_NAME</repositoryName>
+            <checkDestinationCommit>true</checkDestinationCommit>
+        </stashpullrequestbuilder.stashpullrequestbuilder.StashBuildTrigger>
+    </triggers>
+</project>

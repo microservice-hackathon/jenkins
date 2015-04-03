@@ -4,6 +4,7 @@ import javaposse.jobdsl.dsl.DslFactory
 import pl.wybcz.pipeline.domain.GitProject
 import pl.wybcz.pipeline.pr.PrBuilder
 import pl.wybcz.pipeline.pr.GithubPrBuilder
+import pl.wybcz.pipeline.pr.StashPrBuilder
 
 class MicroserviceTemplateBuilder {
 
@@ -25,6 +26,15 @@ class MicroserviceTemplateBuilder {
         )
         closure.delegate = githubPrBuilder
         this.prBuilder = githubPrBuilder
+        closure.call()
+    }
+
+    void buildStashPrs(@DelegatesTo(StashPrBuilder) closure) {
+        StashPrBuilder stashPrBuilder = new StashPrBuilder(
+                dslFactory: dslFactory
+        )
+        closure.delegate = stashPrBuilder
+        this.prBuilder = stashPrBuilder
         closure.call()
     }
 
