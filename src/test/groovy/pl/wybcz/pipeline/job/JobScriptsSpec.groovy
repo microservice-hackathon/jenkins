@@ -2,7 +2,6 @@ package pl.wybcz.pipeline.job
 
 import groovy.io.FileType
 import javaposse.jobdsl.dsl.DslScriptLoader
-import javaposse.jobdsl.dsl.JobManagement
 import javaposse.jobdsl.dsl.MemoryJobManagement
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -15,16 +14,17 @@ class JobScriptsSpec extends Specification {
     @Unroll
     void 'test script #file.name'(File file) {
         given:
-        JobManagement jm = new MemoryJobManagement()
+            MemoryJobManagement jm = new MemoryJobManagement()
+            jm.parameters << [STASH_USERNAME: 'username', STASH_PASSWORD: 'password', TEST_MODE: true]
 
         when:
-        DslScriptLoader.runDslEngine file.text, jm
+            DslScriptLoader.runDslEngine file.text, jm
 
         then:
-        noExceptionThrown()
+            noExceptionThrown()
 
         where:
-        file << jobFiles
+            file << jobFiles
     }
 
     static List<File> getJobFiles() {

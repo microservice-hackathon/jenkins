@@ -1,9 +1,10 @@
 import pl.wybcz.pipeline.domain.GitProject
+import pl.wybcz.pipeline.domain.GitProjectFetcher
 import pl.wybcz.pipeline.template.MicroserviceTemplateBuilder
 
 def organization = 'microhackathon-test'
 def reposApi = new URL("https://api.github.com/orgs/${organization}/repos")
-def repos = new groovy.json.JsonSlurper().parse(reposApi.newReader())
+def repos = new GitProjectFetcher(binding.variables['TEST_MODE'] ?: false, reposApi).fetchRepos()
 
 List projectToCode = repos.findAll {!(it.name == "${organization}.github.io" || it.name == "properties")}
 
