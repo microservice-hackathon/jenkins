@@ -1,5 +1,6 @@
 import pl.wybcz.pipeline.domain.GitProject
 import pl.wybcz.pipeline.template.MicroserviceTemplateBuilder
+import pl.wybcz.pipeline.template.RealmConverter
 
 def stashServerHost = '52.17.120.44:7990'
 def stashProjectCode = 'PRs'
@@ -15,8 +16,11 @@ MicroserviceTemplateBuilder.pipeline(this) {
         password "${STASH_PASSWORD}"
     }
     buildJobs()
-    buildViews { List<GitProject> projectToCode ->
-        return [stash: projectToCode.collect {it.name}]
+    buildViews new RealmConverter() {
+        @Override
+        Map<String, List<String>> convertToRealmMultimap(List<GitProject> projectToCode) {
+            return [stash: projectToCode.collect {it.name}]
+        }
     }
 }
 
