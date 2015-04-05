@@ -16,7 +16,7 @@
             <password>password</password>
             <projectCode>PROJECT_CODE</projectCode>
             <repositoryName>REPO_NAME</repositoryName>
-            <checkDestinationCommit>true</checkDestinationCommit>
+            <checkDestinationCommit>false</checkDestinationCommit>
         </stashpullrequestbuilder.stashpullrequestbuilder.StashBuildTrigger>
     </triggers>
     <concurrentBuild>false</concurrentBuild>

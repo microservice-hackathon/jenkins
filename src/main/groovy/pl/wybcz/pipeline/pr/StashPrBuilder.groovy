@@ -105,7 +105,7 @@ class StashPrBuilder implements PrBuilder {
         (node / 'password').setValue(password)
         (node / 'projectCode').setValue(projectCode)
         (node / 'repositoryName').setValue(repoName)
-        (node / 'checkDestinationCommit').setValue(true)
+        (node / 'checkDestinationCommit').setValue(false)
     }
 
     enum FastForwardMode {
