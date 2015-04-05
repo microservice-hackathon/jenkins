@@ -71,7 +71,7 @@ class StashPrBuilder implements PrBuilder {
                 git {
                     remote {
                         name = 'origin'
-                        url = "ssh://git@$stashHost/\${projectCode}/\${repositoryName}.git"
+                        url = "http://$username@$stashHost/\${projectCode}/\${repositoryName}.git"
                         credentials('STASH')
                     }
                     branch('*/\${sourceBranch}')
