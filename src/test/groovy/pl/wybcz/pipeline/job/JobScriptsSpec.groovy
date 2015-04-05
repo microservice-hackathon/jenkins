@@ -15,7 +15,14 @@ class JobScriptsSpec extends Specification {
     void 'test script #file.name'(File file) {
         given:
             MemoryJobManagement jm = new MemoryJobManagement()
-            jm.parameters << [STASH_USERNAME: 'username', STASH_PASSWORD: 'password', TEST_MODE: true]
+            jm.parameters << [
+                    STASH_HOST: '52.17.120.44:7990',
+                    STASH_PROJECT: 'PRs',
+                    STASH_REPO: 'test-repo',
+                    STASH_USERNAME: 'username',
+                    STASH_PASSWORD: 'password',
+                    TEST_MODE: true
+            ]
 
         when:
             DslScriptLoader.runDslEngine file.text, jm
