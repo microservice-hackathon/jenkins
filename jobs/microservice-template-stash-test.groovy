@@ -2,7 +2,7 @@ import pl.wybcz.pipeline.domain.GitProject
 import pl.wybcz.pipeline.template.MicroserviceTemplateBuilder
 import pl.wybcz.pipeline.template.RealmConverter
 
-def stashServerHost = 'http://52.17.120.44:7990'
+def stashServerHost = '52.17.120.44:7990'
 def stashProjectCode = 'PRs'
 def repoToBuild = 'test-repo'
 
