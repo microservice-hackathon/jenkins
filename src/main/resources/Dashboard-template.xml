@@ -1,7 +1,6 @@
 <hudson.plugins.view.dashboard.Dashboard>
     <owner class="hudson" reference="../../.."/>
     <name>Overview</name>
-    <description>description</description>
     <filterExecutors>false</filterExecutors>
     <filterQueue>false</filterQueue>
     <properties/>
