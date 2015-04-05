@@ -1,4 +1,4 @@
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
     <actions/>
     <description/>
     <keepDependencies>false</keepDependencies>
@@ -7,9 +7,42 @@
     <disabled>false</disabled>
     <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
     <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <triggers class="vector">
+        <stashpullrequestbuilder.stashpullrequestbuilder.StashBuildTrigger>
+            <spec>* * * * *</spec>
+            <cron>* * * * *</cron>
+            <stashHost>http://stash.host.net</stashHost>
+            <username>username</username>
+            <password>password</password>
+            <projectCode>PROJECT_CODE</projectCode>
+            <repositoryName>REPO_NAME</repositoryName>
+            <checkDestinationCommit>true</checkDestinationCommit>
+        </stashpullrequestbuilder.stashpullrequestbuilder.StashBuildTrigger>
+    </triggers>
     <concurrentBuild>false</concurrentBuild>
-    <builders/>
-    <publishers/>
+    <builders>
+        <hudson.plugins.gradle.Gradle>
+            <description/>
+            <switches/>
+            <tasks>clean build</tasks>
+            <rootBuildScriptDir/>
+            <buildFile/>
+            <gradleName>(Default)</gradleName>
+            <useWrapper>true</useWrapper>
+            <makeExecutable>false</makeExecutable>
+            <fromRootBuildScriptDir>true</fromRootBuildScriptDir>
+        </hudson.plugins.gradle.Gradle>
+    </builders>
+    <publishers>
+        <org.jenkinsci.plugins.stashNotifier.StashNotifier>
+            <stashServerBaseUrl/>
+            <stashUserName/>
+            <stashUserPassword/>
+            <ignoreUnverifiedSSLPeer>false</ignoreUnverifiedSSLPeer>
+            <commitSha1/>
+            <includeBuildNumberInKey>false</includeBuildNumberInKey>
+        </org.jenkinsci.plugins.stashNotifier.StashNotifier>
+    </publishers>
     <buildWrappers/>
     <scm class="hudson.plugins.git.GitSCM">
         <userRemoteConfigs>
@@ -18,6 +51,7 @@
                 <url>
                     ssh://git@stash.host.net/${projectCode}/${repositoryName}.git
                 </url>
+                <credentialsId>null</credentialsId>
             </hudson.plugins.git.UserRemoteConfig>
         </userRemoteConfigs>
         <branches>
@@ -48,16 +82,4 @@
             </hudson.plugins.git.extensions.impl.PreBuildMerge>
         </extensions>
     </scm>
-    <triggers class="vector">
-        <stashpullrequestbuilder.stashpullrequestbuilder.StashBuildTrigger>
-            <spec>* * * * *</spec>
-            <cron>* * * * *</cron>
-            <stashHost>stash.host.net</stashHost>
-            <username>username</username>
-            <password>password</password>
-            <projectCode>PROJECT_CODE</projectCode>
-            <repositoryName>REPO_NAME</repositoryName>
-            <checkDestinationCommit>true</checkDestinationCommit>
-        </stashpullrequestbuilder.stashpullrequestbuilder.StashBuildTrigger>
-    </triggers>
 </project>

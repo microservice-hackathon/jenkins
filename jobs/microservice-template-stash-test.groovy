@@ -13,6 +13,9 @@ MicroserviceTemplateBuilder.pipeline(this) {
         cronToPollScm '*/2 * * * *'
         repoName repoToBuild
         projectCode stashProjectCode
+        buildSteps {
+            gradle('clean build')
+        }
         username "${STASH_USERNAME}"
         password "${STASH_PASSWORD}"
     }

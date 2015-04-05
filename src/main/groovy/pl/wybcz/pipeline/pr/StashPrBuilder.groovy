@@ -3,6 +3,7 @@ import groovy.transform.PackageScope
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.Job
 import javaposse.jobdsl.dsl.helpers.scm.GitContext
+import javaposse.jobdsl.dsl.helpers.step.StepContext
 
 class StashPrBuilder implements PrBuilder {
 
@@ -15,6 +16,7 @@ class StashPrBuilder implements PrBuilder {
     @PackageScope String password
     @PackageScope String projectCode
     @PackageScope String repoName
+    @PackageScope Closure buildSteps = defaultBuildSteps()
 
     void stashHost(String stashHost) {
         this.stashHost = stashHost
@@ -48,6 +50,20 @@ class StashPrBuilder implements PrBuilder {
         this.repoName = repoName
     }
 
+    void buildSteps(@DelegatesTo(StepContext) Closure buildSteps) {
+        this.buildSteps = buildStepFromContext(buildSteps)
+    }
+
+    private Closure buildStepFromContext(@DelegatesTo(StepContext) Closure buildSteps) {
+        return buildSteps
+    }
+
+    private Closure defaultBuildSteps() {
+        return buildStepFromContext {
+            gradle('clean build')
+        }
+    }
+
     @Override
     Job buildPrJob(String projectName) {
         return dslFactory.freeStyleJob("$projectName-pr-build") {
@@ -56,16 +72,21 @@ class StashPrBuilder implements PrBuilder {
                     remote {
                         name = 'origin'
                         url = "ssh://git@$stashHost/\${projectCode}/\${repositoryName}.git"
+                        credentials('STASH')
                     }
                     branch('*/\${sourceBranch}')
                     mergeOptions('origin', '${targetBranch}')
                     addExtension(delegate as GitContext)
                 }
             }
+            steps buildSteps
             triggers {
                 configure { Node node ->
                     addStashBuildTrigger(node.triggers)
                 }
+            }
+            publishers {
+                stashNotifier()
             }
         }
     }
@@ -79,7 +100,7 @@ class StashPrBuilder implements PrBuilder {
         def node = triggers / 'stashpullrequestbuilder.stashpullrequestbuilder.StashBuildTrigger'
         (node / 'spec').setValue(cronToPollScm)
         (node / 'cron').setValue(cronToPollScm)
-        (node / 'stashHost').setValue(stashHost)
+        (node / 'stashHost').setValue("http://$stashHost")
         (node / 'username').setValue(username)
         (node / 'password').setValue(password)
         (node / 'projectCode').setValue(projectCode)
