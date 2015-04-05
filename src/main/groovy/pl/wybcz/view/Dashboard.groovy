@@ -12,6 +12,10 @@ class Dashboard extends View {
 
     @Override
     Node getNode() {
-        return new XmlParser().parse(this.class.getResourceAsStream("/${this.class.simpleName}-template.xml"))
+        Node root = new XmlParser().parse(this.class.getResourceAsStream("/${this.class.simpleName}-template.xml"))
+        def field = this.class.superclass.declaredFields.find { it.name == 'withXmlActions' }
+        field.accessible = true
+        field.get(this).each { it.execute(root) }
+        return root
     }
 }
