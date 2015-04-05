@@ -34,3 +34,7 @@ task workspace(type: Copy) {
     from 'src/main/groovy'
     into 'build/workspace'
 }
+
+wrapper {
+    gradleVersion '2.3'
+}
