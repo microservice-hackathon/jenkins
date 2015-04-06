@@ -1,12 +1,10 @@
 package pl.wybcz.pipeline.template
 
-import groovy.transform.CompileStatic
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.Job
 import pl.wybcz.pipeline.pr.PrBuilder
 import pl.wybcz.pipeline.step.DefaultMicroservicePipelineDslFactory
 
-@CompileStatic
 class MicroserviceJobsBuilder {
 
     private final DefaultMicroservicePipelineDslFactory pipeline

@@ -1,9 +1,7 @@
 package pl.wybcz.pipeline.domain
 
 import groovy.json.JsonSlurper
-import groovy.transform.CompileStatic
 
-@CompileStatic
 class GitProjectFetcher {
     private final boolean testMode
     private final URL reposApi

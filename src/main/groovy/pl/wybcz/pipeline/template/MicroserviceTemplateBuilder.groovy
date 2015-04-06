@@ -1,13 +1,11 @@
 package pl.wybcz.pipeline.template
 
-import groovy.transform.CompileStatic
 import javaposse.jobdsl.dsl.DslFactory
 import pl.wybcz.pipeline.domain.GitProject
-import pl.wybcz.pipeline.pr.PrBuilder
 import pl.wybcz.pipeline.pr.GithubPrBuilder
+import pl.wybcz.pipeline.pr.PrBuilder
 import pl.wybcz.pipeline.pr.StashPrBuilder
 
-@CompileStatic
 class MicroserviceTemplateBuilder {
 
     private DslFactory dslFactory
