@@ -38,6 +38,8 @@
                 <hudson.views.LastFailureColumn/>
                 <hudson.views.LastDurationColumn/>
                 <hudson.views.BuildButtonColumn/>
+                <jenkins.plugins.extracolumns.LastBuildConsoleColumn/>
+                <jenkins.plugins.extracolumns.ConfigureProjectColumn/>
             </columns>
             <name>build-waw-pr</name>
             <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
@@ -77,6 +79,8 @@
                 <hudson.views.LastFailureColumn/>
                 <hudson.views.LastDurationColumn/>
                 <hudson.views.BuildButtonColumn/>
+                <jenkins.plugins.extracolumns.LastBuildConsoleColumn/>
+                <jenkins.plugins.extracolumns.ConfigureProjectColumn/>
             </columns>
             <name>publish-waw-pr</name>
             <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>

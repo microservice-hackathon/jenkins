@@ -39,6 +39,8 @@ class MicroserviceViewsBuilder {
                                     lastFailure()
                                     lastDuration()
                                     buildButton()
+                                    lastBuildConsole()
+                                    configureProject()
                                 }
                             }
                         }
