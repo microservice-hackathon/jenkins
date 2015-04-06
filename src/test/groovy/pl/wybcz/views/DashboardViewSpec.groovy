@@ -23,6 +23,6 @@ class DashboardViewSpec extends Specification implements JobSpecTrait, XmlCompar
     }
 
     void assertThatBuildPrJobIsProperlyBuiltFor(View view) {
-        compareXmls("/microservice/views/overview.xml", view.node)
+        compareXmls("/microservice/views/dashboard.xml", view.node)
     }
 }

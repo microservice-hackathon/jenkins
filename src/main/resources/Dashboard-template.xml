@@ -1,11 +1,10 @@
 <hudson.plugins.view.dashboard.Dashboard>
     <owner class="hudson" reference="../../.."/>
-    <name>Overview</name>
     <filterExecutors>false</filterExecutors>
     <filterQueue>false</filterQueue>
     <properties/>
     <jobNames>
-        <comparator/>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
     </jobNames>
     <jobFilters/>
     <columns/>

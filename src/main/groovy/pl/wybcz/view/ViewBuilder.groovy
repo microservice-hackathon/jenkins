@@ -14,7 +14,8 @@ class ViewBuilder {
 
     View appendDashboard() {
         JobParent jobParent = dslFactory as JobParent
-        View view = new Dashboard('Overview', jobParent.jm)
+        View view = new Dashboard(jobParent.jm)
+        view.name = 'Overview'
         jobParent.referencedViews << view
         return view
     }
