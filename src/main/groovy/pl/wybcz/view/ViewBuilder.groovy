@@ -1,8 +1,11 @@
 package pl.wybcz.view
+
+import groovy.transform.CompileStatic
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.JobParent
 import javaposse.jobdsl.dsl.View
 
+@CompileStatic
 class ViewBuilder {
 
     private final DslFactory dslFactory

@@ -1,5 +1,9 @@
 package pl.wybcz.pipeline.domain
 
+import groovy.json.JsonSlurper
+import groovy.transform.CompileStatic
+
+@CompileStatic
 class GitProjectFetcher {
     private final boolean testMode
     private final URL reposApi
@@ -11,11 +15,11 @@ class GitProjectFetcher {
 
     def fetchRepos() {
         if (testMode) {
-            return new groovy.json.JsonSlurper().parseText(''' [{
+            return new JsonSlurper().parseText(''' [{
                     "name": "client-service-waw",
                     "clone_url": "http://git.com/sth"
             }]''')
         }
-        return new groovy.json.JsonSlurper().parse(reposApi.newReader())
+        return new JsonSlurper().parse(reposApi.newReader())
     }
 }

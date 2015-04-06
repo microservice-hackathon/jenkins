@@ -1,16 +1,18 @@
 package pl.wybcz.pipeline.template
 
+import groovy.transform.CompileStatic
 import javaposse.jobdsl.dsl.DslFactory
 import pl.wybcz.pipeline.domain.GitProject
 import pl.wybcz.pipeline.pr.PrBuilder
 import pl.wybcz.pipeline.pr.GithubPrBuilder
 import pl.wybcz.pipeline.pr.StashPrBuilder
 
+@CompileStatic
 class MicroserviceTemplateBuilder {
 
-    DslFactory dslFactory
-    PrBuilder prBuilder
-    List<GitProject> projects
+    private DslFactory dslFactory
+    private PrBuilder prBuilder
+    private List<GitProject> projects
 
     static void pipeline(DslFactory dslFactory, @DelegatesTo(MicroserviceTemplateBuilder) Closure closure) {
         MicroserviceTemplateBuilder microserviceTemplateBuilder = new MicroserviceTemplateBuilder(
@@ -20,7 +22,7 @@ class MicroserviceTemplateBuilder {
         closure.call()
     }
 
-    void buildGithubPrs(@DelegatesTo(GithubPrBuilder) closure) {
+    void buildGithubPrs(@DelegatesTo(GithubPrBuilder) Closure closure) {
         GithubPrBuilder githubPrBuilder = new GithubPrBuilder(
                 dslFactory: dslFactory
         )
@@ -29,7 +31,7 @@ class MicroserviceTemplateBuilder {
         closure.call()
     }
 
-    void buildStashPrs(@DelegatesTo(StashPrBuilder) closure) {
+    void buildStashPrs(@DelegatesTo(StashPrBuilder) Closure closure) {
         StashPrBuilder stashPrBuilder = new StashPrBuilder(
                 dslFactory: dslFactory
         )

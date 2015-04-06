@@ -72,7 +72,4 @@ class GithubPrBuilder implements PrBuilder {
         def githubProjectNode = propertiesNode / 'com.coravy.hudson.plugins.github.GithubProjectProperty'
         (githubProjectNode / 'projectUrl').setValue(organization)
     }
-
 }
-
-

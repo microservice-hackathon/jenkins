@@ -1,7 +1,9 @@
 package pl.wybcz.pipeline.step
 
+import groovy.transform.CompileStatic
 import javaposse.jobdsl.dsl.DslFactory
 
+@CompileStatic
 class DefaultMicroservicePipelineDslFactory {
     
     private final DslFactory dslFactory
