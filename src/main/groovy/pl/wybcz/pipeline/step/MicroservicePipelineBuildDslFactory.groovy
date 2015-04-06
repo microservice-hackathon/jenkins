@@ -39,8 +39,8 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
             steps {
                 gradle('build -x test')
             }
-            publishers downstreamParametrized("${projectName}-deploy-stub-runner")
+            publishers downstreamParametrized("${projectName}-stop-stub-runner")
+            publishers downstreamParametrized("${projectName}-stop-app")
         }
     }
-
 }

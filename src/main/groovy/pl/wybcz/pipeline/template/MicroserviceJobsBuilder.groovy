@@ -19,6 +19,8 @@ class MicroserviceJobsBuilder {
         List<Job> jobs = [
                 pipeline.build(projectName, projectGitRepo),
                 pipeline.publish(projectName, projectGitRepo),
+                pipeline.stopStubRunner(projectName, projectGitRepo),
+                pipeline.stopApp(projectName, projectGitRepo),
                 pipeline.deployStubRunner(projectName, projectGitRepo),
                 pipeline.deployApp(projectName, projectGitRepo),
                 pipeline.runSmokeTests(projectName, projectGitRepo),

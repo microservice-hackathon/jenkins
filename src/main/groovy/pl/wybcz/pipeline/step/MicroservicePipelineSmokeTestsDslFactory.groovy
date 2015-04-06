@@ -11,6 +11,38 @@ class MicroservicePipelineSmokeTestsDslFactory extends AbstractMicroservicePipel
         this.dslFactory = dslFactory
     }
 
+    Job stopStubRunner(String projectName, String projectGitRepo) {
+        return dslFactory.job("${projectName}-stop-stub-runner") {
+            deliveryPipelineConfiguration('Smoke tests', 'Stop stub-runner')
+            wrappers {
+                deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+            }
+            scm {
+                git(projectGitRepo, 'master')
+            }
+            steps {
+                gradle('build -x test')
+            }
+            publishers downstreamParametrized("${projectName}-deploy-stub-runner")
+        }
+    }
+
+    Job stopApp(String projectName, String projectGitRepo) {
+        return dslFactory.job("${projectName}-stop-app") {
+            deliveryPipelineConfiguration('Smoke tests', 'Stop app')
+            wrappers {
+                deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
+            }
+            scm {
+                git(projectGitRepo, 'master')
+            }
+            steps {
+                gradle('build -x test')
+            }
+            publishers downstreamParametrized("${projectName}-deploy-stub-runner")
+        }
+    }
+
     Job deployStubRunner(String projectName, String projectGitRepo) {
         return dslFactory.job("${projectName}-deploy-stub-runner") {
             deliveryPipelineConfiguration('Smoke tests', 'Deploy stub-runner')
