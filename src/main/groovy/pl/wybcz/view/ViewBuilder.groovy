@@ -12,11 +12,12 @@ class ViewBuilder {
         this.dslFactory = dslFactory
     }
 
-    View appendDashboard() {
+    View buildDashboard() {
         JobParent jobParent = dslFactory as JobParent
         View view = new Dashboard(jobParent.jm)
         view.name = 'Overview'
         jobParent.referencedViews << view
         return view
     }
+
 }

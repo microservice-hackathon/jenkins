@@ -3,83 +3,141 @@
     <filterQueue>false</filterQueue>
     <properties class="hudson.model.View$PropertyList"/>
     <views>
-        <au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
-            <filterExecutors>true</filterExecutors>
-            <filterQueue>true</filterQueue>
-            <properties class="hudson.model.View$PropertyList"/>
-            <noOfDisplayedBuilds>5</noOfDisplayedBuilds>
-            <buildViewTitle>build-waw Pipeline</buildViewTitle>
-            <consoleOutputLinkStyle>Lightbox</consoleOutputLinkStyle>
-            <cssUrl/>
-            <triggerOnlyLatestJob>false</triggerOnlyLatestJob>
-            <alwaysAllowManualTrigger>true</alwaysAllowManualTrigger>
-            <showPipelineParameters>true</showPipelineParameters>
-            <showPipelineParametersInHeaders>false</showPipelineParametersInHeaders>
-            <refreshFrequency>5</refreshFrequency>
-            <showPipelineDefinitionHeader>false</showPipelineDefinitionHeader>
-            <selectedJob>build-waw-build</selectedJob>
-            <name>build-waw-pipeline</name>
-            <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
-        </au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
-        <hudson.model.ListView>
+        <hudson.plugins.nested__view.NestedView>
             <filterExecutors>false</filterExecutors>
             <filterQueue>false</filterQueue>
             <properties class="hudson.model.View$PropertyList"/>
-            <jobNames class="tree-set">
-                <comparator class="hudson.util.CaseInsensitiveComparator"/>
-                <string>build-waw-pr-build</string>
-            </jobNames>
-            <jobFilters/>
-            <columns>
-                <hudson.views.StatusColumn/>
-                <hudson.views.WeatherColumn/>
-                <hudson.views.JobColumn/>
-                <hudson.views.LastSuccessColumn/>
-                <hudson.views.LastFailureColumn/>
-                <hudson.views.LastDurationColumn/>
-                <hudson.views.BuildButtonColumn/>
-            </columns>
-            <name>build-waw-pr</name>
+            <views>
+                <au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
+                    <filterExecutors>true</filterExecutors>
+                    <filterQueue>true</filterQueue>
+                    <properties class="hudson.model.View$PropertyList"/>
+                    <noOfDisplayedBuilds>5</noOfDisplayedBuilds>
+                    <buildViewTitle>build-waw Pipeline</buildViewTitle>
+                    <consoleOutputLinkStyle>Lightbox</consoleOutputLinkStyle>
+                    <cssUrl/>
+                    <triggerOnlyLatestJob>false</triggerOnlyLatestJob>
+                    <alwaysAllowManualTrigger>true</alwaysAllowManualTrigger>
+                    <showPipelineParameters>true</showPipelineParameters>
+                    <showPipelineParametersInHeaders>false</showPipelineParametersInHeaders>
+                    <refreshFrequency>5</refreshFrequency>
+                    <showPipelineDefinitionHeader>false</showPipelineDefinitionHeader>
+                    <selectedJob>build-waw-build</selectedJob>
+                    <name>build-waw-pipeline</name>
+                    <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+                </au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
+                <hudson.model.ListView>
+                    <filterExecutors>false</filterExecutors>
+                    <filterQueue>false</filterQueue>
+                    <properties class="hudson.model.View$PropertyList"/>
+                    <jobNames class="tree-set">
+                        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+                        <string>build-waw-pr-build</string>
+                    </jobNames>
+                    <jobFilters/>
+                    <columns>
+                        <hudson.views.StatusColumn/>
+                        <hudson.views.WeatherColumn/>
+                        <hudson.views.JobColumn/>
+                        <hudson.views.LastSuccessColumn/>
+                        <hudson.views.LastFailureColumn/>
+                        <hudson.views.LastDurationColumn/>
+                        <hudson.views.BuildButtonColumn/>
+                    </columns>
+                    <name>build-waw-pr</name>
+                    <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+                </hudson.model.ListView>
+                <au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
+                    <filterExecutors>true</filterExecutors>
+                    <filterQueue>true</filterQueue>
+                    <properties class="hudson.model.View$PropertyList"/>
+                    <noOfDisplayedBuilds>5</noOfDisplayedBuilds>
+                    <buildViewTitle>publish-waw Pipeline</buildViewTitle>
+                    <consoleOutputLinkStyle>Lightbox</consoleOutputLinkStyle>
+                    <cssUrl/>
+                    <triggerOnlyLatestJob>false</triggerOnlyLatestJob>
+                    <alwaysAllowManualTrigger>true</alwaysAllowManualTrigger>
+                    <showPipelineParameters>true</showPipelineParameters>
+                    <showPipelineParametersInHeaders>false</showPipelineParametersInHeaders>
+                    <refreshFrequency>5</refreshFrequency>
+                    <showPipelineDefinitionHeader>false</showPipelineDefinitionHeader>
+                    <selectedJob>publish-waw-build</selectedJob>
+                    <name>publish-waw-pipeline</name>
+                    <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+                </au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
+                <hudson.model.ListView>
+                    <filterExecutors>false</filterExecutors>
+                    <filterQueue>false</filterQueue>
+                    <properties class="hudson.model.View$PropertyList"/>
+                    <jobNames class="tree-set">
+                        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+                        <string>publish-waw-pr-build</string>
+                    </jobNames>
+                    <jobFilters/>
+                    <columns>
+                        <hudson.views.StatusColumn/>
+                        <hudson.views.WeatherColumn/>
+                        <hudson.views.JobColumn/>
+                        <hudson.views.LastSuccessColumn/>
+                        <hudson.views.LastFailureColumn/>
+                        <hudson.views.LastDurationColumn/>
+                        <hudson.views.BuildButtonColumn/>
+                    </columns>
+                    <name>publish-waw-pr</name>
+                    <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+                </hudson.model.ListView>
+            </views>
+            <name>waw-pipelines</name>
             <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
-        </hudson.model.ListView>
-        <au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
-            <filterExecutors>true</filterExecutors>
-            <filterQueue>true</filterQueue>
-            <properties class="hudson.model.View$PropertyList"/>
-            <noOfDisplayedBuilds>5</noOfDisplayedBuilds>
-            <buildViewTitle>publish-waw Pipeline</buildViewTitle>
-            <consoleOutputLinkStyle>Lightbox</consoleOutputLinkStyle>
-            <cssUrl/>
-            <triggerOnlyLatestJob>false</triggerOnlyLatestJob>
-            <alwaysAllowManualTrigger>true</alwaysAllowManualTrigger>
-            <showPipelineParameters>true</showPipelineParameters>
-            <showPipelineParametersInHeaders>false</showPipelineParametersInHeaders>
-            <refreshFrequency>5</refreshFrequency>
-            <showPipelineDefinitionHeader>false</showPipelineDefinitionHeader>
-            <selectedJob>publish-waw-build</selectedJob>
-            <name>publish-waw-pipeline</name>
-            <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
-        </au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
-        <hudson.model.ListView>
+        </hudson.plugins.nested__view.NestedView>
+        <hudson.plugins.nested__view.NestedView>
             <filterExecutors>false</filterExecutors>
             <filterQueue>false</filterQueue>
             <properties class="hudson.model.View$PropertyList"/>
-            <jobNames class="tree-set">
-                <comparator class="hudson.util.CaseInsensitiveComparator"/>
-                <string>publish-waw-pr-build</string>
-            </jobNames>
-            <jobFilters/>
-            <columns>
-                <hudson.views.StatusColumn/>
-                <hudson.views.WeatherColumn/>
-                <hudson.views.JobColumn/>
-                <hudson.views.LastSuccessColumn/>
-                <hudson.views.LastFailureColumn/>
-                <hudson.views.LastDurationColumn/>
-                <hudson.views.BuildButtonColumn/>
-            </columns>
-            <name>publish-waw-pr</name>
+            <views>
+                <se.diabol.jenkins.pipeline.DeliveryPipelineView>
+                    <filterExecutors>false</filterExecutors>
+                    <filterQueue>false</filterQueue>
+                    <properties class="hudson.model.View$PropertyList"/>
+                    <noOfPipelines>0</noOfPipelines>
+                    <showAggregatedPipeline>true</showAggregatedPipeline>
+                    <noOfColumns>1</noOfColumns>
+                    <sorting>none</sorting>
+                    <showAvatars>true</showAvatars>
+                    <updateInterval>5</updateInterval>
+                    <showChanges>true</showChanges>
+                    <allowManualTriggers>true</allowManualTriggers>
+                    <componentSpecs>
+                        <se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+                            <name>Deploy build-waw to production</name>
+                            <firstJob>build-waw-build</firstJob>
+                        </se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+                        <se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+                            <name>Deploy publish-waw to production</name>
+                            <firstJob>publish-waw-build</firstJob>
+                        </se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+                    </componentSpecs>
+                    <name>waw-delivery</name>
+                    <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+                </se.diabol.jenkins.pipeline.DeliveryPipelineView>
+                <com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView>
+                    <filterExecutors>false</filterExecutors>
+                    <filterQueue>false</filterQueue>
+                    <properties class="hudson.model.View$PropertyList"/>
+                    <jobNames>
+                        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+                    </jobNames>
+                    <jobFilters/>
+                    <columns/>
+                    <recurse>false</recurse>
+                    <order class="com.smartcodeltd.jenkinsci.plugins.buildmonitor.order.ByName"/>
+                    <includeRegex>^.*waw-deploy-to-prod$</includeRegex>
+                    <name>waw-deploy-to-prod-monitor</name>
+                    <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+                </com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView>
+            </views>
+            <name>waw-overview</name>
             <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
-        </hudson.model.ListView>
+        </hudson.plugins.nested__view.NestedView>
     </views>
 </hudson.plugins.nested__view.NestedView>

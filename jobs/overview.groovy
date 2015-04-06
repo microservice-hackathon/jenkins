@@ -1,3 +1,3 @@
 import pl.wybcz.view.ViewBuilder
 
-new ViewBuilder(this).appendDashboard()
+new ViewBuilder(this).buildDashboard()

@@ -16,7 +16,7 @@ class DashboardViewSpec extends Specification implements JobSpecTrait, XmlCompar
             ViewBuilder viewBuilder = new ViewBuilder(jobParent)
 
         when:
-            View view = viewBuilder.appendDashboard()
+            View view = viewBuilder.buildDashboard()
 
         then:
             assertThatBuildPrJobIsProperlyBuiltFor(view)
