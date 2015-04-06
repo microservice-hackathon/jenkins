@@ -3,7 +3,7 @@ package pl.wybcz.pipeline.step
 import javaposse.jobdsl.dsl.DslFactory
 
 class DefaultMicroservicePipelineDslFactory {
-    
+
     private final DslFactory dslFactory
     private final @Delegate MicroservicePipelineBuildDslFactory pipelineBuildDslFactory
     private final @Delegate MicroservicePipelineSmokeTestsDslFactory smokeTestsDslFactory

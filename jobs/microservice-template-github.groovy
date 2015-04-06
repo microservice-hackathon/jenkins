@@ -4,7 +4,7 @@ import pl.wybcz.pipeline.template.MicroserviceTemplateBuilder
 
 def organization = 'microhackathon-test'
 def reposApi = new URL("https://api.github.com/orgs/${organization}/repos")
-def repos = new GitProjectFetcher(binding.variables['TEST_MODE'] ?: false, reposApi).fetchRepos()
+def repos = new GitProjectFetcher(binding.variables['TEST_MODE'].toBoolean() ?: false, reposApi).fetchRepos()
 
 List projectToCode = repos.findAll {!(it.name == "${organization}.github.io" || it.name == "properties")}
 

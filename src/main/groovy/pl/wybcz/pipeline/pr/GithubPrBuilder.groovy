@@ -68,8 +68,8 @@ class GithubPrBuilder implements PrBuilder {
         appendGithubProps(propertiesNode, organizationName)
     }
 
-    private void appendGithubProps(propertiesNode, String organization) {
-        def githubProjectNode = propertiesNode / 'com.coravy.hudson.plugins.github.GithubProjectProperty'
+    private void appendGithubProps(Node propertiesNode, String organization) {
+        Node githubProjectNode = propertiesNode / 'com.coravy.hudson.plugins.github.GithubProjectProperty'
         (githubProjectNode / 'projectUrl').setValue(organization)
     }
 }
