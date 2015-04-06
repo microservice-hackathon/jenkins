@@ -36,6 +36,7 @@
             <permitAll>false</permitAll>
             <whitelist>microservice-hackathon-bot</whitelist>
             <autoCloseFailedPullRequests>false</autoCloseFailedPullRequests>
+            <commentFilePath/>
         </org.jenkinsci.plugins.ghprb.GhprbTrigger>
     </triggers>
     <concurrentBuild>false</concurrentBuild>

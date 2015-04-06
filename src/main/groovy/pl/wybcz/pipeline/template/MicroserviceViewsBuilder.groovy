@@ -17,7 +17,7 @@ class MicroserviceViewsBuilder {
                 dslFactory.nestedView(realm) {
                     views {
                         projects.each { String projectName ->
-                            view("${projectName}-pipeline", type: ViewType.BuildPipelineView) {
+                            buildPipelineView("${projectName}-pipeline") {
                                 filterBuildQueue()
                                 filterExecutors()
                                 title("${projectName} Pipeline")
@@ -27,7 +27,7 @@ class MicroserviceViewsBuilder {
                                 showPipelineParameters()
                                 refreshFrequency(5)
                             }
-                            view("${projectName}-pr", type: ViewType.ListView) {
+                            listView("${projectName}-pr") {
                                 jobs{
                                     name("${projectName}-pr-build")
                                 }
