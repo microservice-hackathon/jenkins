@@ -28,15 +28,23 @@ class MicroserviceViewsBuilder {
                                 refreshFrequency(5)
                             }
                             listView("${projectName}-pr") {
-                                jobs{
+                                jobs {
                                     name("${projectName}-pr-build")
                                 }
                                 columns {
                                     status()
                                     weather()
                                     name()
-                                    lastSuccess()
-                                    lastFailure()
+                                }
+                                configure { Node listViewNode ->    //Replace with native support for Compact Columns when available
+                                    listViewNode / 'columns' << 'com.robestone.hudson.compactcolumns.AllStatusesColumn' {
+                                        colorblindHint('nohint')
+                                        timeAgoTypeString('DIFF')
+                                        onlyShowLastStatus(false)
+                                        hideDays(0)
+                                    }
+                                }
+                                columns {
                                     lastDuration()
                                     buildButton()
                                     lastBuildConsole()

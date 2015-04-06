@@ -34,8 +34,12 @@
                 <hudson.views.StatusColumn/>
                 <hudson.views.WeatherColumn/>
                 <hudson.views.JobColumn/>
-                <hudson.views.LastSuccessColumn/>
-                <hudson.views.LastFailureColumn/>
+                <com.robestone.hudson.compactcolumns.AllStatusesColumn>
+                    <colorblindHint>nohint</colorblindHint>
+                    <timeAgoTypeString>DIFF</timeAgoTypeString>
+                    <onlyShowLastStatus>false</onlyShowLastStatus>
+                    <hideDays>0</hideDays>
+                </com.robestone.hudson.compactcolumns.AllStatusesColumn>
                 <hudson.views.LastDurationColumn/>
                 <hudson.views.BuildButtonColumn/>
                 <jenkins.plugins.extracolumns.LastBuildConsoleColumn/>
@@ -75,8 +79,12 @@
                 <hudson.views.StatusColumn/>
                 <hudson.views.WeatherColumn/>
                 <hudson.views.JobColumn/>
-                <hudson.views.LastSuccessColumn/>
-                <hudson.views.LastFailureColumn/>
+                <com.robestone.hudson.compactcolumns.AllStatusesColumn>
+                    <colorblindHint>nohint</colorblindHint>
+                    <timeAgoTypeString>DIFF</timeAgoTypeString>
+                    <onlyShowLastStatus>false</onlyShowLastStatus>
+                    <hideDays>0</hideDays>
+                </com.robestone.hudson.compactcolumns.AllStatusesColumn>
                 <hudson.views.LastDurationColumn/>
                 <hudson.views.BuildButtonColumn/>
                 <jenkins.plugins.extracolumns.LastBuildConsoleColumn/>
