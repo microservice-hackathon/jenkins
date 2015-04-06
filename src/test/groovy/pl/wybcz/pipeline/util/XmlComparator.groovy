@@ -10,19 +10,23 @@ import pl.wybcz.pipeline.template.MicroserviceTemplateBuilderSpec
 trait XmlComparator {
 
     void compareXmls(String file, Node nodeToCompare) {
-        String referenceXml = XmlUtil.serialize(new File(MicroserviceTemplateBuilderSpec.getResource(file).file).text.stripIndent().stripMargin())
+        String referenceXml = XmlUtil.serialize(getFileContent(file).stripIndent().stripMargin())
         String nodeXml = XmlUtil.serialize(nodeToCompare).stripIndent().stripMargin()
         Diff diff = XMLUnit.compareXML(referenceXml, nodeXml)
         XMLUnit.setIgnoreWhitespace(true)
         diff.overrideElementQualifier(new ElementNameAndAttributeQualifier())
         if (!diff.similar()) {
             DetailedDiff detailedDiff = new DetailedDiff(diff)
-            throw new XmlsAreNotSimillar(file, detailedDiff.allDifferences)
+            throw new XmlsAreNotSimilar(file, detailedDiff.allDifferences)
         }
     }
 
-    static class XmlsAreNotSimillar extends RuntimeException {
-        XmlsAreNotSimillar(String file, List diffs) {
+    private static String getFileContent(String file) {
+        new File(MicroserviceTemplateBuilderSpec.getResource(file).toURI()).getCanonicalFile().text
+    }
+
+    static class XmlsAreNotSimilar extends RuntimeException {
+        XmlsAreNotSimilar(String file, List diffs) {
             super("For file [$file] the following differences where found [$diffs]")
         }
     }
