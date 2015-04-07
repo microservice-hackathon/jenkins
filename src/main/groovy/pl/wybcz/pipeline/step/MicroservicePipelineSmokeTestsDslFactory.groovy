@@ -21,7 +21,7 @@ class MicroservicePipelineSmokeTestsDslFactory extends AbstractMicroservicePipel
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle('build -x test')
+                gradle('build')
             }
             publishers downstreamParametrized("${projectName}-deploy-app")
         }
@@ -37,7 +37,7 @@ class MicroservicePipelineSmokeTestsDslFactory extends AbstractMicroservicePipel
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle('build -x test')
+                gradle('build')
             }
             publishers downstreamParametrized("${projectName}-run-smoke-tests")
         }
@@ -53,7 +53,7 @@ class MicroservicePipelineSmokeTestsDslFactory extends AbstractMicroservicePipel
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle('build -x test')
+                gradle('build')
             }
             publishers downstreamParametrized("${projectName}-deploy-previous-version")
         }
@@ -69,7 +69,7 @@ class MicroservicePipelineSmokeTestsDslFactory extends AbstractMicroservicePipel
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle('build -x test')
+                gradle('build')
             }
             publishers downstreamParametrized("${projectName}-run-smoke-tests-on-old-jar")
         }
@@ -85,7 +85,7 @@ class MicroservicePipelineSmokeTestsDslFactory extends AbstractMicroservicePipel
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle('build -x test')
+                gradle('build')
             }
             publishers downstreamParametrized("${projectName}-deploy-to-prod")
         }

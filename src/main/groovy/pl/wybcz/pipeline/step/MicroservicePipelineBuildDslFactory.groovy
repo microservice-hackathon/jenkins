@@ -21,7 +21,7 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle('build -x test')
+                gradle('clean build')
             }
             publishers downstreamParametrized("${projectName}-publish")
         }
@@ -37,7 +37,7 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle('build -x test')
+                gradle('build')
             }
             publishers downstreamParametrized("${projectName}-deploy-stub-runner")
         }

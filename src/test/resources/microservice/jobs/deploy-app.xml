@@ -19,7 +19,7 @@
         <hudson.plugins.gradle.Gradle>
             <description></description>
             <switches></switches>
-            <tasks>build -x test</tasks>
+            <tasks>build</tasks>
             <rootBuildScriptDir></rootBuildScriptDir>
             <buildFile></buildFile>
             <gradleName>(Default)</gradleName>
