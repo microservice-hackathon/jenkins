@@ -21,7 +21,7 @@ class MicroservicePipelineDeployToProdDslFactory extends AbstractMicroservicePip
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle('build')
+                gradle('build -x test -x generateWiremockClientStubs')
             }
         }
     }
