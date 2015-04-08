@@ -1,6 +1,6 @@
-import pl.wybcz.pipeline.domain.GitProject
-import pl.wybcz.pipeline.template.MicroserviceTemplateBuilder
-import pl.wybcz.pipeline.template.RealmConverter
+import com.ofg.pipeline.domain.GitProject
+import com.ofg.pipeline.template.MicroserviceTemplateBuilder
+import com.ofg.pipeline.template.RealmConverter
 
 def stashServerHost = "${STASH_HOST}"
 def stashProjectCode = "${STASH_PROJECT}"
