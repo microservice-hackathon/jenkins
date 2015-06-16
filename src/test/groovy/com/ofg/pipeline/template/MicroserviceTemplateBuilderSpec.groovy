@@ -50,7 +50,7 @@ class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTr
     }
 
     private void  allJobsWereCreatedIncludingPrBuild(Set<Item> jobs) {
-        assert jobs.size() == 9
+        assert jobs.size() == 4
         assert jobs.collect { it.name }.contains('test-job-pr-build')
     }
 

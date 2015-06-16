@@ -18,7 +18,7 @@
         <hudson.plugins.gradle.Gradle>
             <description></description>
             <switches></switches>
-            <tasks>clean build -x test -x generateWiremockClientStubs</tasks>
+            <tasks>clean build</tasks>
             <rootBuildScriptDir></rootBuildScriptDir>
             <buildFile></buildFile>
             <gradleName>(Default)</gradleName>

@@ -18,7 +18,7 @@
         <hudson.plugins.gradle.Gradle>
             <description></description>
             <switches></switches>
-            <tasks>build -x test -x generateWiremockClientStubs</tasks>
+            <tasks>publish</tasks>
             <rootBuildScriptDir></rootBuildScriptDir>
             <buildFile></buildFile>
             <gradleName>(Default)</gradleName>
@@ -31,7 +31,7 @@
         <hudson.plugins.parameterizedtrigger.BuildTrigger>
             <configs>
                 <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-                    <projects>test-job-deploy-stub-runner</projects>
+                    <projects>test-job-deploy-to-prod</projects>
                     <condition>SUCCESS</condition>
                     <triggerWithNoParameters>true</triggerWithNoParameters>
                     <configs>
