@@ -19,11 +19,11 @@ class MicroserviceJobsBuilder {
         List<Job> jobs = [
                 pipeline.build(projectName, projectGitRepo),
                 pipeline.publish(projectName, projectGitRepo),
-                pipeline.deployStubRunner(projectName, projectGitRepo),
-                pipeline.deployApp(projectName, projectGitRepo),
-                pipeline.runSmokeTests(projectName, projectGitRepo),
-                pipeline.deployPreviousVersion(projectName, projectGitRepo),
-                pipeline.runSmokeTestsOnOldJar(projectName, projectGitRepo),
+//                pipeline.deployStubRunner(projectName, projectGitRepo),
+//                pipeline.deployApp(projectName, projectGitRepo),
+//                pipeline.runSmokeTests(projectName, projectGitRepo),
+//                pipeline.deployPreviousVersion(projectName, projectGitRepo),
+//                pipeline.runSmokeTestsOnOldJar(projectName, projectGitRepo),
                 pipeline.deployToProd(projectName, projectGitRepo)
         ]
         return appendPrBuilderIfPresent(jobs, projectName)

@@ -21,7 +21,7 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle('clean build -x test -x generateWiremockClientStubs')
+                gradle('clean build')
             }
             publishers downstreamParametrized("${projectName}-publish")
         }
@@ -37,9 +37,9 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle('build -x test -x generateWiremockClientStubs')
+                gradle('publish')
             }
-            publishers downstreamParametrized("${projectName}-deploy-stub-runner")
+            publishers downstreamParametrized("${projectName}-deploy-to-prod")
         }
     }
 
