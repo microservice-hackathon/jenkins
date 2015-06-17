@@ -1,14 +1,19 @@
 package com.ofg.pipeline.step
 
+import com.ofg.pipeline.domain.NexusBuilder
+import groovy.transform.CompileStatic
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.Job
 
+@CompileStatic
 class MicroservicePipelineDeployToProdDslFactory extends AbstractMicroservicePipeline  {
 
     private final DslFactory dslFactory
+    private final NexusBuilder nexusBuilder
 
-    MicroservicePipelineDeployToProdDslFactory(DslFactory dslFactory) {
+    MicroservicePipelineDeployToProdDslFactory(DslFactory dslFactory, NexusBuilder nexusBuilder) {
         this.dslFactory = dslFactory
+        this.nexusBuilder = nexusBuilder
     }
 
     Job deployToProd(String projectName, String projectGitRepo) {
@@ -30,7 +35,7 @@ class MicroservicePipelineDeployToProdDslFactory extends AbstractMicroservicePip
                     options([
                             artifactId: projectName,
                             groupId: '$groupId',
-                            nexusUrl: '$mavenRepoUrl',
+                            nexusUrl: nexusBuilder.repoUrl,
                             version: '$PIPELINE_VERSION'
 
                     ])

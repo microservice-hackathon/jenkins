@@ -1,8 +1,10 @@
 package com.ofg.pipeline.step
 
 import com.ofg.pipeline.domain.NexusBuilder
+import groovy.transform.CompileStatic
 import javaposse.jobdsl.dsl.DslFactory
 
+@CompileStatic
 class DefaultMicroservicePipelineDslFactory {
     
     private final DslFactory dslFactory
@@ -14,7 +16,7 @@ class DefaultMicroservicePipelineDslFactory {
         this.dslFactory = dslFactory
         this.pipelineBuildDslFactory = new MicroservicePipelineBuildDslFactory(dslFactory, nexusBuilder)
         this.smokeTestsDslFactory = new MicroservicePipelineSmokeTestsDslFactory(dslFactory)
-        this.deployToProdDslFactory = new MicroservicePipelineDeployToProdDslFactory(dslFactory)
+        this.deployToProdDslFactory = new MicroservicePipelineDeployToProdDslFactory(dslFactory, nexusBuilder)
     }
 
 }
