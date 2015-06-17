@@ -117,6 +117,8 @@
                             <firstJob>publish-waw-build</firstJob>
                         </se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
                     </componentSpecs>
+                    <allowRebuild>true</allowRebuild>
+                    <allowPipelineStart>true</allowPipelineStart>
                     <name>waw-delivery</name>
                     <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
                 </se.diabol.jenkins.pipeline.DeliveryPipelineView>

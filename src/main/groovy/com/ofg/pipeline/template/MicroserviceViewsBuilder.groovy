@@ -61,6 +61,10 @@ class MicroserviceViewsBuilder {
                                             component("Deploy $it to production", "${it}-build")
                                         }
                                     }
+                                    configure {
+                                        it / 'allowRebuild'(true)
+                                        it / 'allowPipelineStart'(true)
+                                    }
                                 }
                                 buildMonitorView("${realm}-deploy-to-prod-monitor") {
                                     jobs {
