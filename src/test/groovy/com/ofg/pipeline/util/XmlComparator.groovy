@@ -14,6 +14,7 @@ trait XmlComparator {
         String nodeXml = XmlUtil.serialize(nodeToCompare).stripIndent().stripMargin()
         Diff diff = XMLUnit.compareXML(referenceXml, nodeXml)
         XMLUnit.setIgnoreWhitespace(true)
+        XMLUnit.setNormalizeWhitespace(true)
         diff.overrideElementQualifier(new ElementNameAndAttributeQualifier())
         if (!diff.similar()) {
             DetailedDiff detailedDiff = new DetailedDiff(diff)

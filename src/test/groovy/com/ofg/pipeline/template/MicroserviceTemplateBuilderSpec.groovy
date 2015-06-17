@@ -1,10 +1,10 @@
 package com.ofg.pipeline.template
+import com.ofg.pipeline.domain.GitProject
+import com.ofg.pipeline.util.JobSpecTrait
+import com.ofg.pipeline.util.XmlComparator
 import javaposse.jobdsl.dsl.Item
 import javaposse.jobdsl.dsl.JobParent
 import javaposse.jobdsl.dsl.View
-import com.ofg.pipeline.util.JobSpecTrait
-import com.ofg.pipeline.util.XmlComparator
-import com.ofg.pipeline.domain.GitProject
 import spock.lang.Specification
 
 class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTrait, XmlComparator {

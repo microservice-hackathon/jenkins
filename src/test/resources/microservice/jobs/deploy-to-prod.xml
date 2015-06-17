@@ -14,11 +14,20 @@
     <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
     <triggers class="vector"/>
     <concurrentBuild>false</concurrentBuild>
-    <builders/>
+    <builders>
+        <EnvInjectBuilder>
+            <info>
+                <propertiesFilePath>gradle.properties</propertiesFilePath>
+            </info>
+        </EnvInjectBuilder>
+    </builders>
     <publishers>
         <org.jenkinsci.plugins.rundeck.RundeckNotifier>
             <jobId>deploy</jobId>
-            <options/>
+            <options>artifactId=test-job
+                groupId=pl.devoxx
+                nexusUrl=http://nexus.com
+                version=1.0.0</options>
             <nodeFilters/>
             <tag/>
             <shouldWaitForRundeckJob>true</shouldWaitForRundeckJob>

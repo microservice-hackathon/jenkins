@@ -20,8 +20,20 @@ class MicroservicePipelineDeployToProdDslFactory extends AbstractMicroservicePip
             scm {
                 git(projectGitRepo, 'master')
             }
+            steps {
+                environmentVariables {
+                    propertiesFile('gradle.properties')
+                }
+            }
             publishers {
                 rundeck('deploy') {
+                    options([
+                            artifactId: projectName,
+                            groupId: 'pl.devoxx',
+                            nexusUrl: System.getenv().getOrDefault('mavenRepoUrl', 'http://nexus.com'),
+                            version: System.getenv().getOrDefault('PIPELINE_VERSION', '1.0.0')
+
+                    ])
                     shouldFailTheBuild()
                     shouldWaitForRundeckJob()
                 }
