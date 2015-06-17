@@ -1,11 +1,8 @@
 package com.ofg.pipeline.step
-
 import com.ofg.pipeline.domain.NexusBuilder
-import groovy.transform.CompileStatic
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.Job
 
-@CompileStatic
 class MicroservicePipelineDeployToProdDslFactory extends AbstractMicroservicePipeline  {
 
     private final DslFactory dslFactory
