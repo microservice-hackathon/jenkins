@@ -1,4 +1,17 @@
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.ofg:uptodate-gradle-plugin:1.5.1'
+    }
+}
+
 apply plugin: 'groovy'
+apply plugin: 'com.ofg.uptodate'
 
 sourceSets {
     jobs {
@@ -16,7 +29,7 @@ repositories {
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.3'
-    compile 'org.jenkins-ci.plugins:job-dsl-core:1.31'
+    compile 'org.jenkins-ci.plugins:job-dsl-core:1.34'
     testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
         exclude module: 'groovy-all'
     }
