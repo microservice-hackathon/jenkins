@@ -29,7 +29,7 @@ class MicroservicePipelineDeployToProdDslFactory extends AbstractMicroservicePip
                 rundeck('deploy') {
                     options([
                             artifactId: projectName,
-                            groupId: 'pl.devoxx',
+                            groupId: '$groupId',
                             nexusUrl: '$mavenRepoUrl',
                             version: '$PIPELINE_VERSION'
 

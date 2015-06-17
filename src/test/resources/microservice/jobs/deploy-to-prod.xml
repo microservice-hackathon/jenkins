@@ -25,7 +25,7 @@
         <org.jenkinsci.plugins.rundeck.RundeckNotifier>
             <jobId>deploy</jobId>
             <options>artifactId=test-job
-                groupId=pl.devoxx
+                groupId=$groupId
                 nexusUrl=$mavenRepoUrl
                 version=$PIPELINE_VERSION</options>
             <nodeFilters/>
