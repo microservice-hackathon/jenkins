@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><hudson.plugins.nested__view.NestedView>
+    <filterExecutors>false</filterExecutors>
+    <filterQueue>false</filterQueue>
+    <properties class="hudson.model.View$PropertyList"/>
+    <views>
+        <com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView>
+            <filterExecutors>false</filterExecutors>
+            <filterQueue>false</filterQueue>
+            <properties class="hudson.model.View$PropertyList"/>
+            <jobNames>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            </jobNames>
+            <jobFilters/>
+            <columns/>
+            <recurse>false</recurse>
+            <order class="com.smartcodeltd.jenkinsci.plugins.buildmonitor.order.ByName"/>
+            <includeRegex>^.*-deploy-to-prod$</includeRegex>
+            <name>deploy-to-prod-monitor</name>
+            <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+        </com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView>
+    </views>
+</hudson.plugins.nested__view.NestedView>

@@ -20,8 +20,11 @@ class MicroservicePipelineDeployToProdDslFactory extends AbstractMicroservicePip
             scm {
                 git(projectGitRepo, 'master')
             }
-            steps {
-                gradle('build -x test -x generateWiremockClientStubs')
+            publishers {
+                rundeck('deploy') {
+                    shouldFailTheBuild()
+                    shouldWaitForRundeckJob()
+                }
             }
         }
     }

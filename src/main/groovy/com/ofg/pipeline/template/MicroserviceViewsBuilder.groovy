@@ -71,6 +71,15 @@ class MicroserviceViewsBuilder {
                             }
                         }
                     }
+                },
+                dslFactory.nestedView('prod') {
+                    views {
+                        buildMonitorView("deploy-to-prod-monitor") {
+                            jobs {
+                                regex("^.*-deploy-to-prod\$")
+                            }
+                        }
+                    }
                 }
 
         ]

@@ -1,4 +1,4 @@
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
     <actions/>
     <description/>
     <keepDependencies>false</keepDependencies>
@@ -14,20 +14,17 @@
     <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
     <triggers class="vector"/>
     <concurrentBuild>false</concurrentBuild>
-    <builders>
-        <hudson.plugins.gradle.Gradle>
-            <description></description>
-            <switches></switches>
-            <tasks>build -x test -x generateWiremockClientStubs</tasks>
-            <rootBuildScriptDir></rootBuildScriptDir>
-            <buildFile></buildFile>
-            <gradleName>(Default)</gradleName>
-            <useWrapper>true</useWrapper>
-            <makeExecutable>false</makeExecutable>
-            <fromRootBuildScriptDir>true</fromRootBuildScriptDir>
-        </hudson.plugins.gradle.Gradle>
-    </builders>
-    <publishers/>
+    <builders/>
+    <publishers>
+        <org.jenkinsci.plugins.rundeck.RundeckNotifier>
+            <jobId>deploy</jobId>
+            <options/>
+            <nodeFilters/>
+            <tag/>
+            <shouldWaitForRundeckJob>true</shouldWaitForRundeckJob>
+            <shouldFailTheBuild>true</shouldFailTheBuild>
+        </org.jenkinsci.plugins.rundeck.RundeckNotifier>
+    </publishers>
     <buildWrappers>
         <se.diabol.jenkins.pipeline.PipelineVersionContributor>
             <versionTemplate>${ENV,var="PIPELINE_VERSION"}</versionTemplate>
