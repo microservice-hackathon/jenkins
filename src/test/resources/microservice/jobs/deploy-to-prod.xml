@@ -23,7 +23,7 @@
     </builders>
     <publishers>
         <org.jenkinsci.plugins.rundeck.RundeckNotifier>
-            <jobId>deploy</jobId>
+            <jobId>deploy:deploy</jobId>
             <options>artifactId=test-job
                 groupId=$groupId
                 nexusUrl=$mavenRepoUrl

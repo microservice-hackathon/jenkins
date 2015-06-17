@@ -26,7 +26,7 @@ class MicroservicePipelineDeployToProdDslFactory extends AbstractMicroservicePip
                 }
             }
             publishers {
-                rundeck('deploy') {
+                rundeck('deploy:deploy') {
                     options([
                             artifactId: projectName,
                             groupId: '$groupId',
