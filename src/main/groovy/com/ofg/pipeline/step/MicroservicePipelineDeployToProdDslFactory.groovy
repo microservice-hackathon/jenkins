@@ -30,8 +30,8 @@ class MicroservicePipelineDeployToProdDslFactory extends AbstractMicroservicePip
                     options([
                             artifactId: projectName,
                             groupId: 'pl.devoxx',
-                            nexusUrl: System.getenv().getOrDefault('mavenRepoUrl', 'http://nexus.com'),
-                            version: System.getenv().getOrDefault('PIPELINE_VERSION', '1.0.0')
+                            nexusUrl: '$mavenRepoUrl',
+                            version: '$PIPELINE_VERSION'
 
                     ])
                     shouldFailTheBuild()

@@ -26,8 +26,8 @@
             <jobId>deploy</jobId>
             <options>artifactId=test-job
                 groupId=pl.devoxx
-                nexusUrl=http://nexus.com
-                version=1.0.0</options>
+                nexusUrl=$mavenRepoUrl
+                version=$PIPELINE_VERSION</options>
             <nodeFilters/>
             <tag/>
             <shouldWaitForRundeckJob>true</shouldWaitForRundeckJob>
