@@ -99,8 +99,8 @@
                     <filterExecutors>false</filterExecutors>
                     <filterQueue>false</filterQueue>
                     <properties class="hudson.model.View$PropertyList"/>
-                    <noOfPipelines>0</noOfPipelines>
-                    <showAggregatedPipeline>true</showAggregatedPipeline>
+                    <noOfPipelines>10</noOfPipelines>
+                    <showAggregatedPipeline>false</showAggregatedPipeline>
                     <noOfColumns>1</noOfColumns>
                     <sorting>none</sorting>
                     <showAvatars>true</showAvatars>

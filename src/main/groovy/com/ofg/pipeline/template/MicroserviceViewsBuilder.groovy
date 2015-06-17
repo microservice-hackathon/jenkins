@@ -50,13 +50,12 @@ class MicroserviceViewsBuilder {
                         nestedView("${realm}-overview") {
                             views {
                                 deliveryPipelineView("${realm}-delivery") {
-                                    pipelineInstances(0)
-                                    showAggregatedPipeline()
+                                    pipelineInstances(10)
                                     columns(1)
                                     updateInterval(5)
                                     enableManualTriggers()
-                                    showAvatars()
                                     showChangeLog()
+                                    showAvatars()
                                     pipelines {
                                         projects.each {
                                             component("Deploy $it to production", "${it}-build")
