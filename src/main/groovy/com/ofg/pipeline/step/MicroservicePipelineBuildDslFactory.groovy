@@ -37,7 +37,7 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle('publish')
+                gradle('publish -PbuildNr=$PIPELINE_VERSION')
             }
             publishers downstreamParametrized("${projectName}-deploy-to-prod")
         }
