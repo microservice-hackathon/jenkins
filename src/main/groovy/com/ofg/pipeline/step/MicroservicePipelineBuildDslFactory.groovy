@@ -13,7 +13,7 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
 
     Job build(String projectName, String projectGitRepo) {
         return dslFactory.job("${projectName}-build") {
-            deliveryPipelineConfiguration('Build', 'Build')
+            deliveryPipelineConfiguration('Build', 'Build and deploy')
             wrappers {
                 deliveryPipelineVersion('CD-${BUILD_NUMBER}', true)
             }
@@ -21,9 +21,9 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle('clean build')
+                gradle('clean build publish -PbuildNr=$PIPELINE_VERSION --stacktrace')
             }
-            publishers downstreamParametrized("${projectName}-publish")
+            publishers downstreamParametrized("${projectName}-deploy-to-prod")
         }
     }
 
@@ -37,7 +37,7 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle('publish -PbuildNr=$PIPELINE_VERSION')
+                gradle('publish')
             }
             publishers downstreamParametrized("${projectName}-deploy-to-prod")
         }
