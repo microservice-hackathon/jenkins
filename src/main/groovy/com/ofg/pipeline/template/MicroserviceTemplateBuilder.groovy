@@ -1,15 +1,17 @@
 package com.ofg.pipeline.template
 
-import javaposse.jobdsl.dsl.DslFactory
 import com.ofg.pipeline.domain.GitProject
+import com.ofg.pipeline.domain.NexusBuilder
 import com.ofg.pipeline.pr.GithubPrBuilder
 import com.ofg.pipeline.pr.PrBuilder
 import com.ofg.pipeline.pr.StashPrBuilder
+import javaposse.jobdsl.dsl.DslFactory
 
 class MicroserviceTemplateBuilder {
 
     private DslFactory dslFactory
     private PrBuilder prBuilder
+    private NexusBuilder nexusBuilder
     private List<GitProject> projects
 
     static void pipeline(DslFactory dslFactory, @DelegatesTo(MicroserviceTemplateBuilder) Closure closure) {
@@ -29,6 +31,13 @@ class MicroserviceTemplateBuilder {
         closure.call()
     }
 
+    void withNexus(@DelegatesTo(NexusBuilder) Closure closure) {
+        NexusBuilder builder = new NexusBuilder()
+        this.nexusBuilder = builder
+        closure.delegate = builder
+        closure.call()
+    }
+
     void buildStashPrs(@DelegatesTo(StashPrBuilder) Closure closure) {
         StashPrBuilder stashPrBuilder = new StashPrBuilder(
                 dslFactory: dslFactory
@@ -43,7 +52,7 @@ class MicroserviceTemplateBuilder {
     }
 
     void buildJobs() {
-        MicroserviceJobsBuilder microserviceJobsBuilder = new MicroserviceJobsBuilder(dslFactory, prBuilder)
+        MicroserviceJobsBuilder microserviceJobsBuilder = new MicroserviceJobsBuilder(dslFactory, prBuilder, nexusBuilder)
         projects.each {
             microserviceJobsBuilder.buildJobs(it.name, it.cloneUrl)
         }

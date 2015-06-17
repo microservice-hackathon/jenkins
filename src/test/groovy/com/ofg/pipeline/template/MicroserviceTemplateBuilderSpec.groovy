@@ -17,6 +17,10 @@ class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTr
         given:
             MicroserviceTemplateBuilder.pipeline(jobParent) {
                 forProjects([new GitProject(JOB_NAME, 'git@github.com:example/example.git')])
+                withNexus {
+                    mavenUsername('maven')
+                    repoUrl('http://nexus')
+                }
                 buildJobs()
             }
 
@@ -38,6 +42,10 @@ class MicroserviceTemplateBuilderSpec extends Specification implements JobSpecTr
                     cronToPollScm '*/2 * * * *'
                     organizationName 'microhackathon-2015-03-juglodz'
                     whitelistedUsers(['microservice-hackathon-bot'])
+                }
+                withNexus {
+                    mavenUsername('maven')
+                    repoUrl('http://nexus')
                 }
                 buildJobs()
             }

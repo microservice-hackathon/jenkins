@@ -1,4 +1,4 @@
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
     <actions/>
     <description/>
     <keepDependencies>false</keepDependencies>
@@ -16,11 +16,11 @@
     <concurrentBuild>false</concurrentBuild>
     <builders>
         <hudson.plugins.gradle.Gradle>
-            <description></description>
-            <switches></switches>
-            <tasks>clean build publish -PbuildNr=$PIPELINE_VERSION --stacktrace</tasks>
-            <rootBuildScriptDir></rootBuildScriptDir>
-            <buildFile></buildFile>
+            <description/>
+            <switches/>
+            <tasks>clean build publish -PbuildNr=$PIPELINE_VERSION --stacktrace -PmavenUser=maven -PmavenRepoUrl=http://nexus</tasks>
+            <rootBuildScriptDir/>
+            <buildFile/>
             <gradleName>(Default)</gradleName>
             <useWrapper>true</useWrapper>
             <makeExecutable>false</makeExecutable>
@@ -50,6 +50,16 @@
             <versionTemplate>CD-${BUILD_NUMBER}</versionTemplate>
             <updateDisplayName>true</updateDisplayName>
         </se.diabol.jenkins.pipeline.PipelineVersionContributor>
+        <EnvInjectPasswordWrapper>
+            <injectGlobalPasswords>true</injectGlobalPasswords>
+            <passwordEntries/>
+        </EnvInjectPasswordWrapper>
+        <com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper/>
+        <EnvInjectBuildWrapper>
+            <info>
+                <loadFilesFromMaster>false</loadFilesFromMaster>
+            </info>
+        </EnvInjectBuildWrapper>
     </buildWrappers>
     <scm class="hudson.plugins.git.GitSCM">
         <userRemoteConfigs>

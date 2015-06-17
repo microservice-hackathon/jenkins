@@ -1,5 +1,6 @@
 package com.ofg.pipeline.template
 
+import com.ofg.pipeline.domain.NexusBuilder
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.Job
 import com.ofg.pipeline.pr.PrBuilder
@@ -10,8 +11,8 @@ class MicroserviceJobsBuilder {
     private final DefaultMicroservicePipelineDslFactory pipeline
     private final PrBuilder prBuilder
 
-    MicroserviceJobsBuilder(DslFactory dslFactory, PrBuilder prBuilder) {
-        this.pipeline = new DefaultMicroservicePipelineDslFactory(dslFactory)
+    MicroserviceJobsBuilder(DslFactory dslFactory, PrBuilder prBuilder, NexusBuilder nexusBuilder) {
+        this.pipeline = new DefaultMicroservicePipelineDslFactory(dslFactory, nexusBuilder)
         this.prBuilder = prBuilder
     }
 

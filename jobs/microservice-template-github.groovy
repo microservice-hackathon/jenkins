@@ -17,6 +17,10 @@ MicroserviceTemplateBuilder.pipeline(this) {
         organizationName organization
         whitelistedUsers(['microservice-hackathon-bot'])
     }
+    withNexus {
+        mavenUsername('admin')
+        repoUrl((binding.variables['REPO_URL'] ?: 'http://54.171.73.213:8081/nexus/content/repositories/releases/') as String)
+    }
     buildJobs()
     buildViews()
 }

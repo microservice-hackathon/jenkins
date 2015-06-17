@@ -19,6 +19,10 @@ MicroserviceTemplateBuilder.pipeline(this) {
         username "${STASH_USERNAME}"
         password "${STASH_PASSWORD}"
     }
+    withNexus {
+        mavenUsername('maven')
+        repoUrl('http://nexus')
+    }
     buildJobs()
     buildViews new RealmConverter() {
         @Override
