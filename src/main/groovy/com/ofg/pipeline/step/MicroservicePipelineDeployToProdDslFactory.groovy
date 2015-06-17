@@ -33,7 +33,7 @@ class MicroservicePipelineDeployToProdDslFactory extends AbstractMicroservicePip
             publishers {
                 rundeck('deploy:deploy') {
                     options([
-                            artifactId: projectName,
+                            artifactId: projectName - '.io',
                             groupId: '$groupId',
                             nexusUrl: nexusBuilder.repoUrl,
                             version: '$PIPELINE_VERSION'
