@@ -1,7 +1,5 @@
 package com.ofg.pipeline.domain
-import groovy.transform.CompileStatic
 
-@CompileStatic
 class NexusBuilder {
 
     String repoUrl
