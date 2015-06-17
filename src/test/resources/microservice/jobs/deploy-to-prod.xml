@@ -26,7 +26,7 @@
             <jobId>deploy:deploy</jobId>
             <options>artifactId=test-job
                 groupId=$groupId
-                nexusUrl=$mavenRepoUrl
+                nexusUrl=http://nexus
                 version=$PIPELINE_VERSION</options>
             <nodeFilters/>
             <tag/>
