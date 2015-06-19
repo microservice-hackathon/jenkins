@@ -12,7 +12,11 @@
     <disabled>false</disabled>
     <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
     <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-    <triggers class="vector"/>
+    <triggers class="vector">
+        <com.cloudbees.jenkins.GitHubPushTrigger>
+            <spec/>
+        </com.cloudbees.jenkins.GitHubPushTrigger>
+    </triggers>
     <concurrentBuild>false</concurrentBuild>
     <builders>
         <hudson.plugins.gradle.Gradle>

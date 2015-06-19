@@ -24,6 +24,9 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
                     maskPasswords()
                 }
             }
+            triggers {
+                githubPush()
+            }
             scm {
                 git(projectGitRepo, 'master')
             }
