@@ -29,7 +29,8 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
                 scm('*/1 * * * *')
             }
             configure {
-                def slack = it / 'jenkins.plugins.slack.SlackNotifier_-SlackJobProperty'
+                Node propertiesNode = it / 'properties'
+                def slack = propertiesNode / 'jenkins.plugins.slack.SlackNotifier_-SlackJobProperty'
                 (slack / 'startNotification').setValue(true)
                 (slack / 'notifySuccess').setValue(true)
                 (slack / 'notifyAborted').setValue(true)
