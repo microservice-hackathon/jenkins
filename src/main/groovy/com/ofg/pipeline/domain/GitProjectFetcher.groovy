@@ -18,6 +18,6 @@ class GitProjectFetcher {
                     "clone_url": "http://git.com/sth"
             }]''')
         }
-        return new JsonSlurper().parse(reposApi.newReader())
+        return new JsonSlurper().parseText(OfflineGithubApi.API)
     }
 }
