@@ -48,6 +48,7 @@
         </hudson.plugins.gradle.Gradle>
     </builders>
     <publishers>
+        <jenkins.plugins.slack.SlackNotifier/>
         <hudson.plugins.parameterizedtrigger.BuildTrigger>
             <configs>
                 <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

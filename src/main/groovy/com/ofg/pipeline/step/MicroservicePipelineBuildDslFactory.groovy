@@ -41,6 +41,8 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
                 (slack / 'notifyRepeatedFailure').setValue(true)
                 (slack / 'includeTestSummary').setValue(true)
                 (slack / 'showCommitList').setValue(true)
+                def publishers = (it / 'publishers')
+                publishers / 'jenkins.plugins.slack.SlackNotifier'
             }
             scm {
                 git(projectGitRepo, 'master')
