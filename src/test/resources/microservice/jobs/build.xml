@@ -16,6 +16,10 @@
         <com.cloudbees.jenkins.GitHubPushTrigger>
             <spec/>
         </com.cloudbees.jenkins.GitHubPushTrigger>
+        <hudson.triggers.SCMTrigger>
+            <spec>*/1 * * * *</spec>
+            <ignorePostCommitHooks>false</ignorePostCommitHooks>
+        </hudson.triggers.SCMTrigger>
     </triggers>
     <concurrentBuild>false</concurrentBuild>
     <builders>

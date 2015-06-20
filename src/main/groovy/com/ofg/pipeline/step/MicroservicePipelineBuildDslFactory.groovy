@@ -26,6 +26,7 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
             }
             triggers {
                 githubPush()
+                scm('*/1 * * * *')
             }
             scm {
                 git(projectGitRepo, 'master')
