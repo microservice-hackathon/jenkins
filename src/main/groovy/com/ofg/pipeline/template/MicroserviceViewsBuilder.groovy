@@ -1,6 +1,7 @@
 package com.ofg.pipeline.template
 
 import javaposse.jobdsl.dsl.*
+import javaposse.jobdsl.dsl.views.NestedView
 import javaposse.jobdsl.dsl.views.NestedViewsContext
 
 class MicroserviceViewsBuilder {
@@ -16,19 +17,10 @@ class MicroserviceViewsBuilder {
                 dslFactory.nestedView("${realm}") {
                     views {
                         nestedView("${realm}-pipelines") {
+                            NestedView nestedViewDelegate = delegate as NestedView
                             views {
-                                NestedViewsContext context = delegate
+                                NestedViewsContext context = delegate as NestedViewsContext
                                 projects.each { String projectName ->
-                                    context.buildPipelineView("${projectName}-pipeline") {
-                                        filterBuildQueue()
-                                        filterExecutors()
-                                        title("${projectName} Pipeline")
-                                        displayedBuilds(5)
-                                        selectedJob("${projectName}-build")
-                                        alwaysAllowManualTrigger()
-                                        showPipelineParameters()
-                                        refreshFrequency(5)
-                                    }
                                     context.listView("${projectName}-pr") {
                                         jobs {
                                             name("${projectName}-pr-build")
@@ -43,8 +35,30 @@ class MicroserviceViewsBuilder {
                                             buildButton()
                                         }
                                     }
+                                    context.deliveryPipelineView("${projectName}-delivery") {
+                                        pipelineInstances(10)
+                                        columns(1)
+                                        updateInterval(5)
+                                        enableManualTriggers()
+                                        showChangeLog()
+                                        showAvatars()
+                                        pipelines {
+                                            projects.each {
+                                                component("Deploy $it to production", "${it}-build")
+                                            }
+                                        }
+                                        configure {
+                                            it / 'allowRebuild'(true)
+                                            it / 'allowPipelineStart'(true)
+                                        }
+                                    }
                                 }
-
+                                nestedViewDelegate.configure { projectNode ->
+                                    projectNode / 'views' / 'se.diabol.jenkins.pipeline.DeliveryPipelineView' << {
+                                        'allowRebuild'('true')
+                                        'allowPipelineStart'('true')
+                                    }
+                                }
                             }
                         }
                         nestedView("${realm}-overview") {
@@ -66,25 +80,22 @@ class MicroserviceViewsBuilder {
                                         it / 'allowPipelineStart'(true)
                                     }
                                 }
-                                buildMonitorView("${realm}-deploy-to-prod-monitor") {
-                                    jobs {
-                                        regex("^.*${realm}-deploy-to-prod\$")
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                dslFactory.nestedView('prod') {
-                    views {
-                        buildMonitorView("deploy-to-prod-monitor") {
-                            jobs {
-                                regex("^.*-deploy-to-prod\$")
                             }
                         }
                     }
                 }
-
-        ]
+    ,
+    dslFactory.nestedView ( 'prod' ) {
+        views {
+            buildMonitorView("deploy-to-prod-monitor") {
+                jobs {
+                    regex("^.*-deploy-to-prod\$")
+                }
+            }
+        }
     }
+
+    ]
+}
+
 }
