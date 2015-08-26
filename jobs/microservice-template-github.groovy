@@ -19,7 +19,7 @@ MicroserviceTemplateBuilder.pipeline(this) {
     }
     withNexus {
         mavenUsername('admin')
-        repoUrl((binding.variables['REPO_URL'] ?: 'http://54.171.73.213:8081/nexus/content/repositories/releases/') as String)
+        repoUrl((binding.variables['REPO_URL'] ?: 'http://52.16.215.68:8081/nexus/content/repositories/releases/') as String)
     }
     buildJobs()
     buildViews()
