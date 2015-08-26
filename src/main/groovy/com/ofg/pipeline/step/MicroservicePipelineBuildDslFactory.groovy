@@ -35,7 +35,7 @@ class MicroservicePipelineBuildDslFactory extends AbstractMicroservicePipeline  
                 git(projectGitRepo, 'master')
             }
             steps {
-                gradle("clean build publish -PbuildNr=\$PIPELINE_VERSION --stacktrace -PmavenUser=$nexusBuilder.mavenUsername -PmavenRepoUrl=$nexusBuilder.repoUrl")
+                gradle("clean build publish -PbuildNr=\$PIPELINE_VERSION --stacktrace -PmavenUser=$nexusBuilder.mavenUsername -PmavenRepoUrl=$nexusBuilder.repoUrl -PmavenPassword=\${MAVEN_PASSWORD}")
             }
             publishers downstreamParametrized("${projectName}-deploy-to-prod")
         }
