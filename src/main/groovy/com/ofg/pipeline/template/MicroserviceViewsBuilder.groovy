@@ -16,10 +16,17 @@ class MicroserviceViewsBuilder {
                 dslFactory.nestedView("${realm}") {
                     views {
                         nestedView("${realm}-pipelines") {
+                            //TODO: Switch to a native support when available
+                            configure { projectNode ->
+                                projectNode / 'views' / 'se.diabol.jenkins.pipeline.DeliveryPipelineView' << {
+                                    'allowRebuild'('true')
+                                    'allowPipelineStart'('true')
+                                }
+                            }
                             views {
                                 NestedViewsContext context = delegate
                                 projects.each { String projectName ->
-                                    context.buildPipelineView("${projectName}-pipeline") {
+                                    /*context.buildPipelineView("${projectName}-pipeline") {
                                         filterBuildQueue()
                                         filterExecutors()
                                         title("${projectName} Pipeline")
@@ -28,8 +35,8 @@ class MicroserviceViewsBuilder {
                                         alwaysAllowManualTrigger()
                                         showPipelineParameters()
                                         refreshFrequency(5)
-                                    }
-                                    context.listView("${projectName}-pr") {
+                                    }*/
+                                    /*context.listView("${projectName}-pr") {
                                         jobs {
                                             name("${projectName}-pr-build")
                                         }
@@ -42,9 +49,23 @@ class MicroserviceViewsBuilder {
                                             lastDuration()
                                             buildButton()
                                         }
+                                    }*/
+                                    context.deliveryPipelineView("${projectName}-delivery") {
+                                        pipelineInstances(10)
+                                        columns(1)
+                                        updateInterval(5)
+                                        enableManualTriggers()
+                                        showChangeLog()
+                                        showAvatars()
+                                        pipelines {
+                                            component("Deploy $projectName to production", "${projectName}-build")
+                                        }
+                                        configure {
+                                            it / 'allowRebuild'(true)
+                                            it / 'allowPipelineStart'(true)
+                                        }
                                     }
                                 }
-
                             }
                         }
                         nestedView("${realm}-overview") {
