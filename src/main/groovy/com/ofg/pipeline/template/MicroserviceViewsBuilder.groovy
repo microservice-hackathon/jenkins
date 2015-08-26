@@ -1,6 +1,7 @@
 package com.ofg.pipeline.template
 
 import javaposse.jobdsl.dsl.*
+import javaposse.jobdsl.dsl.views.NestedView
 import javaposse.jobdsl.dsl.views.NestedViewsContext
 
 class MicroserviceViewsBuilder {
@@ -16,17 +17,12 @@ class MicroserviceViewsBuilder {
                 dslFactory.nestedView("${realm}") {
                     views {
                         nestedView("${realm}-pipelines") {
-                            //TODO: Switch to a native support when available
-                            configure { projectNode ->
-                                projectNode / 'views' / 'se.diabol.jenkins.pipeline.DeliveryPipelineView' << {
-                                    'allowRebuild'('true')
-                                    'allowPipelineStart'('true')
-                                }
-                            }
-                            views {
+                            NestedView nestedView = delegate
+                            projects.each { String projectName ->
+                                nestedView.views {
                                 NestedViewsContext context = delegate
-                                projects.each { String projectName ->
-                                    context.buildPipelineView("${projectName}-pipeline") {
+
+                                    /*context.buildPipelineView("${projectName}-pipeline") {
                                         filterBuildQueue()
                                         filterExecutors()
                                         title("${projectName} Pipeline")
@@ -49,7 +45,7 @@ class MicroserviceViewsBuilder {
                                             lastDuration()
                                             buildButton()
                                         }
-                                    }
+                                    }*/
                                     context.deliveryPipelineView("${projectName}-delivery") {
                                         pipelineInstances(10)
                                         columns(1)
