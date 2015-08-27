@@ -38,7 +38,7 @@
         <hudson.plugins.gradle.Gradle>
             <description/>
             <switches/>
-            <tasks>clean build publish -PbuildNr=$PIPELINE_VERSION --stacktrace -PmavenUser=maven -PmavenRepoUrl=http://nexus</tasks>
+            <tasks>clean build publish -PbuildNr=$PIPELINE_VERSION --stacktrace -PmavenUser=maven -PmavenRepoUrl=http://nexus -PmavenPassword=${MAVEN_PASSWORD}</tasks>
             <rootBuildScriptDir/>
             <buildFile/>
             <gradleName>(Default)</gradleName>
